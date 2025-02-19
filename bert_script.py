@@ -9,6 +9,7 @@ import re
 import spacy
 from transformers import pipeline
 from fuzzywuzzy import process
+from transformers import T5Tokenizer, T5ForConditionalGeneration
 
 # Load spaCy's pre-trained English model for NER
 nlp = spacy.load("en_core_web_sm")
@@ -99,6 +100,24 @@ def extract_entities(question):
     return ticker, year
 
 
+# Load T5 Model and Tokenizer
+t5_model_name = "t5-small"  # You can use "t5-base" or "t5-large" for better results
+t5_tokenizer = T5Tokenizer.from_pretrained(t5_model_name)
+t5_model = T5ForConditionalGeneration.from_pretrained(t5_model_name)
+
+def generate_answer_with_t5(question, extracted_answer, ticker, year):
+    """
+    Uses T5 to generate a natural language answer.
+    """
+    prompt = f"Answer this question naturally: {question}. The extracted answer is {extracted_answer}. The company is {ticker}, and the year is {year}."
+
+    # Tokenize and generate output
+    input_ids = t5_tokenizer(prompt, return_tensors="pt").input_ids
+    output_ids = t5_model.generate(input_ids, max_length=50)
+
+    # Decode the response
+    return t5_tokenizer.decode(output_ids[0], skip_special_tokens=True)
+
 def answer_question(question):
     """
     Determines the correct company and year using NLP, retrieves relevant context, and passes it to the QA model.
@@ -119,11 +138,15 @@ def answer_question(question):
 
     if "No data available" in context:
         return context
-
-    # Use QA model to extract the answer
+    
     response = qa_pipeline(question=question, context=context)
 
-    return response['answer']
+    # Use QA model to extract the answer
+    extracted_answer = response['answer']
+
+    # Generate a full answer using T5
+    return generate_answer_with_t5(question, extracted_answer, ticker, year)
+
 
 
 # Example Queries

@@ -17,6 +17,8 @@ nlp = spacy.load("en_core_web_sm")
 industry_df = pd.read_csv("sp500-companies.csv", encoding='ISO-8859-1')
 finance_df = pd.read_csv("Financials_SP500.csv", encoding='ISO-8859-1')
 executive_df = pd.read_csv("sp500_firm_execu.csv", encoding='ISO-8859-1')
+aggregated_data = pd.read_csv("aggregated_stats.csv", encoding='ISO-8859-1')
+
 executive_df = executive_df.rename(columns={'tic': 'Ticker'})
 
 # Standardize tickers
@@ -29,7 +31,7 @@ merged_df["Name"] = merged_df["Name"].fillna("")
 
 # Create a lookup dictionary for quick company name -> ticker mapping
 company_name_to_ticker = {row["Name"].lower(): row["Ticker"] for _, row in industry_df.iterrows()}
-print(company_name_to_ticker)
+
 # Create a structured knowledge base (financials + executives)
 knowledge_base = {}
 
@@ -64,6 +66,20 @@ for _, row in executive_df.iterrows():
         f"In {year}, {row['exec_fname']} {row['exec_lname']} served as {row['title']} at {ticker}."
     )
 
+# Initialize an aggregate section in the knowledge base
+for _, row in aggregated_data.iterrows():
+    year = row["Year"]
+    if "aggregates" not in knowledge_base:
+        knowledge_base["aggregates"] = {}
+
+    knowledge_base["aggregates"][year] = {
+        "highest_gross_profit": row["highest_gross_profit"],  
+        "highest_income": row["Company_with_highest_income"],  
+        "highest_increase_in_gross_profit": row["highest_increase_in_gross_profit"],
+        "highest_operating_expense": row["highest_operating_expense"],
+        "highest_revenue": row["Company_with_highest_revenue"]
+    }
+
 # Load a pre-trained QA model
 qa_pipeline = pipeline("question-answering", model="distilbert-base-cased-distilled-squad")
 
@@ -77,34 +93,53 @@ def fuzzy_company_lookup(company_name, company_name_to_ticker):
 
 def extract_entities(question):
     """
-    Uses NLP to extract company names, tickers, and years from a question.
+    Uses NLP to extract company names, tickers, years, and determine if it's an aggregate query.
     """
     doc = nlp(question)
 
     ticker = None
     year = None
+    aggregate_key = None  # Track if the question is about an aggregate
 
-    # Extract named entities from the question
     for ent in doc.ents:
-        if ent.label_ == "ORG":  # Organizations (companies)
-            possible_ticker = company_name_to_ticker.get(ent.text.lower())  # Direct lookup
-            if not possible_ticker:
-                possible_ticker = fuzzy_company_lookup(ent.text.lower(), company_name_to_ticker)  # Fuzzy matching
-            
+        if ent.label_ == "ORG":  # Company name
+            possible_ticker = company_name_to_ticker.get(ent.text.lower()) or fuzzy_company_lookup(ent.text.lower(), company_name_to_ticker)
             if possible_ticker:
                 ticker = possible_ticker
         elif ent.label_ == "DATE" or re.match(r"\b(19\d{2}|20\d{2})\b", ent.text):
             year = int(ent.text)
 
-    return ticker, year
+    # Detect aggregate-type questions
+    question_lower = question.lower()
+    if "highest gross profit" in question_lower:
+        aggregate_key = "highest_gross_profit"
+    elif "highest revenue" in question_lower:
+        aggregate_key = "highest_revenue"
+    elif "highest net income" in question_lower:
+        aggregate_key = "highest_net_income"
+    elif "highest operating expense" in question_lower:
+        aggregate_key = "highest_operating_expense"
+    elif "highest increase in gross profit" in question_lower:
+        aggregate_key = "highest_increase_in_gross_profit"
+
+    return ticker, year, aggregate_key
 
 
 def answer_question(question):
     """
     Determines the correct company and year using NLP, retrieves relevant context, and passes it to the QA model.
     """
-    ticker, year = extract_entities(question)
+    ticker, year, aggregate_key = extract_entities(question)
+    
+    if aggregate_key:  # If it's an aggregate query
+        if not year:
+            return "Please specify a year."
 
+        result = knowledge_base.get("aggregates", {}).get(year, {}).get(aggregate_key, "No data available.")
+        if result == "No data available.":
+            return result
+        return f"The company with the {aggregate_key.replace('_', ' ')} in {year} was {result}."
+    
     if not ticker:
         return "I couldn't determine the company you're asking about."
 
@@ -132,3 +167,6 @@ print(answer_question("How much net income did Microsoft have in 2019?"))
 print(answer_question("Who was the CEO of Apple in 2021?"))
 print(answer_question("What was the revenue of Visa in 2020"))
 print(answer_question("What was the gross profit of Equinix in 2021?"))
+print(answer_question("What company had the highest gross profit in 2021?"))
+print(answer_question("What company had the highest operating expense in 2023?"))
+print(answer_question("What company had the highest increase in gross profit in 2022?"))

@@ -26,7 +26,7 @@ for df in [finance_df, industry_df, executive_df]:
     df["Ticker"] = df["Ticker"].astype(str).str.strip().str.upper()
 
 # Merge finance_df with industry_df to get company names
-merged_df = finance_df.merge(industry_df[['Ticker', 'Name']], on="Ticker", how="left")
+merged_df = finance_df.merge(industry_df[['Ticker']], on="Ticker", how="left")
 merged_df["Name"] = merged_df["Name"].fillna("")
 
 # Create a lookup dictionary for quick company name -> ticker mapping
@@ -45,9 +45,12 @@ for _, row in merged_df.iterrows():
     knowledge_base[ticker][year] = {
         "financials": (
             f"In {year}, {row['Name']} had {row['Shares (Basic)']} shares outstanding, "
-            f"reported a revenue of ${row['Revenue']} billion, "
-            f"a gross profit of ${row['Gross Profit']} billion, "
-            f"and a net income of ${row['Net Income']} billion."
+            f"reported a revenue of ${row['Revenue']}, "
+            f"a gross profit of ${row['Gross Profit']}, "
+            f"and a net income of ${row['Net Income']}, "
+            f"and it's increase in gross profit was ${row['increase_in_gross_profit']}, "
+            f"and it's increase in operating expense was ${row['increase_in_operating_expense']}, "
+            f"and it's increase in net income was ${row['Increase_in_Net_Income']}"
         )
     }
 
@@ -170,3 +173,6 @@ print(answer_question("What was the gross profit of Equinix in 2021?"))
 print(answer_question("What company had the highest gross profit in 2021?"))
 print(answer_question("What company had the highest operating expense in 2023?"))
 print(answer_question("What company had the highest increase in gross profit in 2022?"))
+print(answer_question("Who had the highest revenue in 2020?"))
+print(answer_question("What was the increase in net income of Apple in 2023?"))
+print(answer_question("What was the gross profit of Adobe in 2021?"))

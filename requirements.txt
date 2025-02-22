@@ -3,4 +3,4 @@ spacy==3.8.4
 transformers==4.48.3
 fuzzywuzzy==0.18.0
 SentencePiece==0.2.0
-
+torch==2.6.0

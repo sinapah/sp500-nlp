@@ -113,17 +113,20 @@ def extract_entities(question):
             year = int(ent.text)
 
     # Detect aggregate-type questions
-    question_lower = question.lower()
-    if "highest gross profit" in question_lower:
-        aggregate_key = "highest_gross_profit"
-    elif "highest revenue" in question_lower:
-        aggregate_key = "highest_revenue"
-    elif "highest net income" in question_lower:
-        aggregate_key = "highest_net_income"
-    elif "highest operating expense" in question_lower:
-        aggregate_key = "highest_operating_expense"
-    elif "highest increase in gross profit" in question_lower:
-        aggregate_key = "highest_increase_in_gross_profit"
+    aggregate_mappings = {
+        "highest gross profit": "highest_gross_profit",
+        "highest revenue": "highest_revenue",
+        "highest net income": "highest_net_income",
+        "highest operating expense": "highest_operating_expense",
+        "highest increase in gross profit": "highest_increase_in_gross_profit"
+    }
+
+    # Use fuzzy matching to determine the best match
+    match = process.extractOne(question.lower(), aggregate_mappings.keys(), score_cutoff=90)
+
+    if match:  # Ensure match is not None before unpacking
+        best_match, _ = match  # Extract the best matching key
+        aggregate_key = aggregate_mappings[best_match]
 
     return ticker, year, aggregate_key
 

@@ -9,6 +9,7 @@ import re
 import spacy
 from transformers import pipeline
 from fuzzywuzzy import process
+import json
 
 # Load spaCy's pre-trained English model for NER
 nlp = spacy.load("en_core_web_sm")
@@ -166,6 +167,12 @@ def answer_question(question):
 
     return response['answer']
 
+# Define the JSON filename
+json_filename = "knowledge_base.json"
+
+# Save knowledge_base as a JSON file
+with open(json_filename, "w", encoding="utf-8") as f:
+    json.dump(knowledge_base, f, indent=4)
 
 # Example Queries
 print(answer_question("What was the revnue of Apple in 2020?"))

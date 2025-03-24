@@ -186,3 +186,4 @@ print(answer_question("What company had the highest increase in gross profit in 
 print(answer_question("Who had the highest revenue in 2020?"))
 print(answer_question("What was the increase in net income of Apple in 2023?"))
 print(answer_question("What was the gross profit of Adobe in 2021?"))
+print(answer_question("What were Agilent Technologies financials in 2023?"))

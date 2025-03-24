@@ -1,0 +1,372 @@
+question: What were Agilent Technologies's financials in 2019?
+question: What was Michael Tang's position at Agilent Technologies in 2019?
+question: What were Agilent Technologies's financials in 2020?
+question: What was Samraat Raha's position at Agilent Technologies in 2020?
+question: What were Agilent Technologies's financials in 2021?
+question: Who was one of Agilent Technologies's executives in 2021?
+question: What were Agilent Technologies's financials in 2022?
+question: What was Samraat Raha's position at Agilent Technologies in 2022?
+question: What were Agilent Technologies's financials in 2023?
+question: Who was one of Agilent Technologies's executives in 2023?
+question: Who was one of Agilent Technologies's executives in 2000?
+question: What was D. Nordlund's position at Agilent Technologies in 2001?
+question: What was D. Nordlund's position at Agilent Technologies in 2002?
+question: What position did Jean Nye hold at Agilent Technologies in 2003?
+question: What was Patrick Byrne's position at Agilent Technologies in 2004?
+question: What was Patrick Byrne's position at Agilent Technologies in 2005?
+question: What was Patrick Byrne's position at Agilent Technologies in 2006?
+question: What was Patrick Byrne's position at Agilent Technologies in 2007?
+question: What roles did Nersesian hold at Agilent Technologies in 2008?
+question: Who was one of Agilent Technologies' executives in 2009?
+question: Who was one of Agilent Technologies' executives in 2010?
+question: Who was one of Agilent Technologies' executives in 2011?
+question: Who was one of Agilent Technologies' executives in 2012?
+question: What was Lars Holmkvist's position at Agilent Technologies in 2013?
+question: What position did Marie Huber hold at Agilent Technologies in 2014?
+question: What was Henrik Ancher-Jensen's position at Agilent Technologies in 2015?
+question: Who was one of Agilent Technologies's executives in 2016?
+question: Who was one of Agilent Technologies' executives in 2017?
+question: Who was one of Agilent Technologies's executives in 2018?
+question: What were American Airlines Group's financials in 2019?
+question: Who was one of American Airlines Group's executives in 2019?
+question: What were American Airlines Group's financials in 2020?
+question: Who was one of American Airlines Group's executives in 2020?
+question: What were American Airlines Group's financials in 2021?
+question: Who was one of American Airlines Group's executives in 2021?
+question: What were American Airlines Group's financials in 2022?
+question: Who was one of American Airlines Group's executives in 2022?
+question: What were American Airlines Group's financials in 2023?
+question: Who was Vasu Raja in 2023?
+question: What position did Anne McNamara hold at American Airlines Group in 2000?
+question: What position did Henry Joyner hold at American Airlines Group in 2001?
+question: Who was Jeffrey Campbell in 2002?
+question: What was Robert Reding's position at American Airlines Group in 2003?
+question: What was Robert Reding's position at American Airlines Group in 2004?
+question: What was Robert Reding's position at American Airlines Group in 2005?
+question: What was Robert Reding's position at American Airlines Group in 2006?
+question: What was Robert Reding's position at American Airlines Group in 2007?
+question: What was Robert Reding's position at American Airlines Group in 2008?
+question: What was Robert Reding's position at American Airlines Group in 2009?
+question: Who was one of American Airlines Group's executives in 2010?
+question: Who was one of American Airlines Group's executives in 2011?
+question: What was James Ream's position at American Airlines Group in 2012?
+question: Who was the CEO of American Airlines Group in 2013?
+question: Who was the CEO of American Airlines Group in 2014?
+question: Who was the CEO of American Airlines Group in 2015?
+question: Who was one of American Airlines Group's executives in 2016?
+question: Who was one of American Airlines Group's executives in 2017?
+question: What was Maya Leibman's position at American Airlines Group in 2018?
+question: What were Apple Inc.'s financials in 2019?
+question: What position did Deirdre OBrien hold at Apple in 2019?
+question: What were Apple Inc.'s financials in 2020?
+question: What position did Deirdre OBrien hold at Apple in 2020?
+question: What were Apple Inc.'s financials in 2021?
+question: What position did Deirdre OBrien hold at Apple in 2021?
+question: What were Apple Inc.'s financials in 2022?
+question: What position did Deirdre OBrien hold at Apple in 2022?
+question: What were Apple Inc.'s financials in 2023?
+question: What position did Deirdre OBrien hold at Apple in 2023?
+question: Who was one of Apple Inc.'s executives in 2000?
+question: Who was one of Apple Inc. 's executives in 2001?
+question: Who was one of Apple Inc. 's executives in 2002?
+question: Who was Peter Oppenheimer in 2003?
+question: What position did Philip Schiller hold at Apple in 2004?
+question: Who was one of Apple Inc. 's executives in 2005?
+question: What position did Philip Schiller hold at Apple in 2006?
+question: What was Anthony Fadell's position at Apple in 2007?
+question: What position did Robert Mansfield hold at Apple in 2008?
+question: What position did Scott Forstall hold at Apple in 2009?
+question: What position did D. Sewell hold at Apple in 2010?
+question: What position did Eduardo Cue hold at Apple in 2011?
+question: Who was Chief Operating Officer of Apple Inc. in 2012?
+question: What position did Daniel Riccio hold at Apple in 2013?
+question: What position did Daniel Riccio hold at Apple in 2014?
+question: What position did Daniel Riccio hold at Apple in 2015?
+question: What position did Daniel Riccio hold at Apple in 2016?
+question: What position did Johny Srouji hold at Apple in 2017?
+question: What position did Katherine Adams hold at Apple in 2018?
+question: What were AbbVie's financials in 2019?
+question: Who were AbbVie's executives in 2019?
+question: What were AbbVie's financials in 2020?
+question: Who was one of AbbVie's executives in 2020?
+question: What were AbbVie's financials in 2021?
+question: Who was one of AbbVie's executives in 2021?
+question: What were AbbVie's financials in 2022?
+question: Who was one of AbbVie's executives in 2022?
+question: What were AbbVie's financials in 2023?
+question: Who was one of AbbVie's executives in 2023?
+question: What position did Laura Schumacher hold at AbbVie in 2009?
+question: What position did Laura Schumacher hold at AbbVie in 2010?
+question: What was John Leonard's position at AbbVie in 2011?
+question: Who was one of AbbVie's executives in 2012?
+question: What position did Timothy Richmond hold at AbbVie in 2013?
+question: Who was one of AbbVie's executives in 2014?
+question: Who was one of AbbVie's executives in 2015?
+question: What was Henry Gosebruch's position at AbbVie in 2016?
+question: Who was one of AbbVie's executives in 2017?
+question: Who was one of AbbVie's executives in 2018?
+question: What were ABNB's financials in 2019?
+question: What was Brian Chesky's role at ABNB in 2019?
+question: What were ABNB's financials in 2020 ?
+question: Who were ABNB's executives in 2020?
+question: What were ABNB's financials in 2021 ?
+question: Who were ABNB's executives in 2021?
+question: What were ABNB's financials in 2022?
+question: Who were ABNB's executives in 2022?
+question: What were ABNB's financials in 2023?
+question: Who were ABNB's executives in 2023?
+question: What were Abbott's financials in 2019?
+question: Who was one of Abbott's executives in 2019?
+question: What were Abbott's financials in 2020?
+question: Who was one of Abbott's executives in 2020?
+question: What were Abbott's financials in 2021?
+question: Who was one of Abbott's executives in 2021?
+question: What were Abbott's financials in 2022?
+question: Who was one of Abbott's executives in 2022?
+question: What were Abbott's financials in 2023?
+question: Who was Philip Boudreau in 2023?
+question: What was Thomas Freyman's position at Abbott in 2000?
+question: What was Thomas Freyman's position at Abbott in 2001?
+question: What was Thomas Freyman's position at Abbott in 2002?
+question: What was Thomas Freyman's position at Abbott in 2003?
+question: What was Thomas Freyman's position at Abbott in 2004?
+question: What was Thomas Freyman's position at Abbott in 2005?
+question: Who was one of Abbott's executives in 2006?
+question: What was Stephen Fussell's position at Abbott in 2007?
+question: What was Laura Schumacher's position at Abbott in 2008?
+question: What position did Olivier Bohuon hold at Abbott in 2009?
+question: What was Laura Schumacher's position at Abbott in 2010?
+question: What was Edward Michael, J.D. ' s position at Abbott in 2011?
+question: What position did Carlos Alban hold at Abbott in 2012?
+question: What position did Brian Blaser hold at Abbott in 2013?
+question: What position did John Landgraf hold at Abbott in 2014?
+question: What position did Michael Warmuth hold at Abbott in 2015?
+question: What position did Michael Warmuth hold at Abbott in 2016?
+question: What was Daniel Salvadori's position at Abbott in 2017?
+question: What was Robert Ford's position at Abbott in 2018?
+question: What were Accenture's financials in 2019?
+question: What was Kathleen McClure's position at Accenture in 2019?
+question: What were Accenture's financials in 2020?
+question: What was Jean-Marc Ollagnier's position at Accenture in 2020?
+question: What were Accenture's financials in 2021 ?
+question: Who was one of Accenture's executives in 2021?
+question: What were Accenture's financials in 2022?
+question: Who was James Etheredge in 2022?
+question: What were Accenture's financials in 2023?
+question: Who was one of Accenture's executives in 2023?
+question: Who was William Green in 2000?
+question: Who was William Green in 2001?
+question: Who was the chief strategy officer of Accenture in 2002?
+question: What was Diego Visconti's role at Accenture in 2003?
+question: What was Diego Visconti's position at Accenture in 2004?
+question: What was Diego Visconti's position at Accenture in 2005?
+question: What was Diego Visconti's position at Accenture in 2006?
+question: What was Kevin Campbell's position at Accenture in 2007?
+question: What was Kevin Campbell's position at Accenture in 2008?
+question: What was Kevin Campbell's position at Accenture in 2009?
+question: What was Kevin Campbell's position at Accenture in 2010?
+question: What was Alexander van't Noordende's position at Accenture in 2011?
+question: What position did Martin Cole hold at Accenture in 2012?
+question: What was Richard Lumb's position at Accenture in 2013?
+question: What was Richard Lumb's role at Accenture in 2014?
+question: Who was the CEO of Accenture in 2015?
+question: Who was the CEO of Accenture in 2016?
+question: Who was the CEO of Accenture in 2017?
+question: Who was the CEO of Accenture in 2018?
+question: What were Adobe Inc.'s financials in 2019?
+question: What position did John Murphy hold at Adobe Inc. in 2019?
+question: What were Adobe Inc.'s financials in 2020?
+question: What position did John Murphy hold at Adobe Inc. in 2020?
+question: What were Adobe Inc.'s financials in 2021?
+question: Who was John Murphy in 2021?
+question: What were Adobe Inc.'s financials in 2022?
+question: Who was one of Adobe Inc.'s executives in 2022?
+question: What were Adobe Inc.'s financials in 2023?
+question: Who was one of Adobe Inc.'s executives in 2023?
+question: Who was Bryan Lamkin in 2000?
+question: Who was Bryan Lamkin in 2001?
+question: What position did James Heeger hold at Adobe Inc. in 2002?
+question: What position did James Heeger hold at Adobe Inc. in 2003?
+question: What position did Karen Cottle hold at Adobe in 2004?
+question: What position did Karen Cottle hold at Adobe in 2005?
+question: What position did Peg Wynn hold at Adobe Inc. in 2006?
+question: What was Mark Garrett's position at Adobe Inc. in 2007?
+question: What position did Johnny Loiacono hold at Adobe Inc. in 2008?
+question: What position did Johnny Loiacono hold at Adobe Inc. in 2009?
+question: What position did Robert Tarkoff hold at Adobe Inc. in 2010?
+question: What position did Wadhwani hold at Adobe in 2011?
+question: What position did Wadhwani hold at Adobe in 2012?
+question: What position did Bradley Rencher hold at Adobe Inc. in 2013?
+question: What position did Bradley Rencher hold at Adobe Inc. in 2014?
+question: What position did Abhay Parasnis hold at Adobe in 2015?
+question: What position did Bradley Rencher hold at Adobe Inc. in 2016?
+question: What position did Bradley Rencher hold at Adobe Inc. in 2017?
+question: What position did John Murphy hold at Adobe Inc. in 2018?
+question: What were Analog Devices's financials in 2019?
+question: What position did Martin Cotter hold at Analog Devices in 2019?
+question: What were Analog Devices's financials in 2020?
+question: What position did Martin Cotter hold at Analog Devices in 2020?
+question: What were Analog Devices's financials in 2021 ?
+question: What position did Anelise Sacks hold at Analog Devices in 2021?
+question: What were Analog Devices's financials in 2022?
+question: What position did Anelise Sacks hold at Analog Devices in 2022?
+question: What were Analog Devices's financials in 2023?
+question: What position did Anelise Sacks hold at Analog Devices in 2023?
+question: What position did Franklin Weigold hold at Analog Devices in 2000?
+question: What position did Robert Marshall hold at Analog Devices in 2001?
+question: What position did Robert McAdam hold at Analog Devices in 2002?
+question: What position did Robert McAdam hold at Analog Devices in 2003?
+question: What position did Robert McAdam hold at Analog Devices in 2004?
+question: What position did Robert McAdam hold at Analog Devices in 2005?
+question: What position did Robert McAdam hold at Analog Devices in 2006?
+question: Who was the CEO of Analog Devices in 2007?
+question: Who was the CEO of Analog Devices in 2008?
+question: Who was the CEO of Analog Devices in 2009?
+question: What position did Vincent Roche hold at Analog Devices in 2010?
+question: What position did Vincent Roche hold at Analog Devices in 2011?
+question: Who was the CEO of Analog Devices in 2012?
+question: What position did Richard Meaney hold at Analog Devices in 2013?
+question: What position did Richard Meaney hold at Analog Devices in 2014?
+question: What position did Peter Real hold at Analog Devices in 2015?
+question: What position did Peter Real hold at Analog Devices in 2016?
+question: What position did Prashanth Mahendra-Rajah hold at Analog Devices in 2017?
+question: What position did Martin Cotter hold at Analog Devices in 2018?
+question: What were ADM's financials in 2019?
+question: What was Vincent Macciocchi' s position at ADM in 2019?
+question: What were ADM's financials in 2020 ?
+question: Who was Vincent Macciocchi in 2020?
+question: What were ADM's financials in 2021 ?
+question: Who was Vincent Macciocchi in 2021?
+question: What were ADM's financials in 2022?
+question: Who was one of ADM's executives in 2022?
+question: What were ADM's financials in 2023 ?
+question: Who was one of ADM's executives in 2023?
+question: Who was one of ADM's executives in 2000?
+question: Who was ADM's executive vp in 2001?
+question: Who was ADM's executive vp in 2002?
+question: Who was ADM's executive vp in 2003?
+question: Who was ADM's executive vp in 2004?
+question: Who was ADM's executive vp in 2005?
+question: Who was ADM's executive vp in 2006?
+question: Who was one of ADM's executives in 2007?
+question: What position did Steven Mills hold at ADM in 2008?
+question: Who was one of ADM's executives in 2009?
+question: What position did Steven Mills hold at ADM in 2010?
+question: What position did Juan Luciano hold at ADM in 2011?
+question: What position did Matthew Jansen hold at ADM in 2012?
+question: What position did Craig Huss hold at ADM in 2013?
+question: Who was Joseph Taets in 2014?
+question: What position did Joseph Taets hold at ADM in 2015?
+question: Who was one of ADM's executives in 2016?
+question: Who was one of ADM's executives in 2017?
+question: What position did Christopher Cuddy hold at ADM in 2018?
+question: What were ADP's financials in 2019?
+question: What position did Thomas Perrotti hold at ADP in 2019?
+question: What were ADP's financials in 2020 ?
+question: What position did Donald Weinstein hold at ADP in 2020?
+question: What were ADP's financials in 2021 ?
+question: What position did Donald Weinstein hold at ADP in 2021?
+question: What were ADP's financials in 2022 ?
+question: Who was one of ADP's executives in 2022?
+question: What were ADP's financials in 2023?
+question: Who was one of ADP's executives in 2023?
+question: What position did S. Martone hold at ADP in 2000?
+question: What position did S. Martone hold at ADP in 2001?
+question: What position did S. Martone hold at ADP in 2002?
+question: What position did S. Martone hold at ADP in 2003?
+question: What position did S. Martone hold at ADP in 2004?
+question: What position did S. Martone hold at ADP in 2005?
+question: What position did S. Martone hold at ADP in 2006?
+question: What was Henry Taub's position at ADP in 2007?
+question: Who was one of ADP's executives in 2008?
+question: Who was one of ADP's executives in 2009?
+question: What position did Campbell Langdon hold at ADP in 2010?
+question: What position did Steven Anenen hold at ADP in 2011?
+question: What position did Jan Siegmund hold at ADP in 2012?
+question: Who was one of ADP's executives in 2013?
+question: What position did Dermot O'Brien hold at ADP in 2014?
+question: What position did Mark Benjamin hold at ADP in 2015?
+question: What was Mark Benjamin's position at ADP in 2016?
+question: Who was one of ADP's executives in 2017?
+question: What position did Edward Flynn, III hold at ADP in 2018?
+question: Who was one of ADP's executives in 2024?
+question: What were Autodesk's financials in 2019?
+question: What was Carmel Galvin's position at Autodesk in 2019?
+question: What were Autodesk's financials in 2020?
+question: What position did Carmel Galvin hold at Autodesk in 2020?
+question: What were Autodesk's financials in 2021?
+question: Who was one of Autodesk's executives in 2021?
+question: What were Autodesk's financials in 2022?
+question: Who was one of Autodesk's executives in 2022?
+question: What were Autodesk's financials in 2023?
+question: Who was one of Autodesk's executives in 2023?
+question: Who was one of Autodesk's executives in 2000?
+question: What position did Carl Bass hold at Autodesk in 2001?
+question: Who was Alfred Castino in 2002?
+question: What was Alfred Castino's position at Autodesk in 2003?
+question: Who was Alfred Castino in 2004?
+question: What was Alfred Castino's position at Autodesk in 2005?
+question: What was Jan Becker's position at Autodesk in 2006?
+question: What was Jan Becker's position at Autodesk in 2007?
+question: What was Jan Becker's position at Autodesk in 2008?
+question: What position did Mark Hawkins hold at Autodesk in 2009?
+question: Who was one of Autodesk's executives in 2010?
+question: What was Steven Blum's position at Autodesk in 2011?
+question: What was Amar Hanspal's role at Autodesk in 2012?
+question: What was Steven Blum's position at Autodesk in 2013?
+question: What position did Herren hold at Autodesk in 2014?
+question: What was Andrew Anagnost's position at Autodesk in 2015?
+question: Who was one of Autodesk's executives in 2016?
+question: Who was one of Autodesk's executives in 2017?
+question: What was Carmel Galvin's position at Autodesk in 2018?
+question: What were Ameren's financials in 2019?
+question: What was Bhavani Amirthalingam's position at Ameren in 2019?
+question: What were Ameren's financials in 2020?
+question: Who was one of Ameren's executives in 2020?
+question: What were Ameren's financials in 2021 ?
+question: Who was one of Ameren's executives in 2021?
+question: What were Ameren's financials in 2022?
+question: Who was Ameren's executive in 2022?
+question: What were Ameren's financials in 2023?
+question: Who was one of Ameren's executives in 2023?
+question: Who was Ameren's executive chairman in 2000?
+question: Who was Ameren's executive chairman in 2001?
+question: What positions did Steven Sullivan hold at Ameren in 2002?
+question: What position did Charles Naslund hold at Ameren in 2003?
+question: What position did Charles Naslund hold at Ameren in 2004?
+question: What position did Charles Naslund hold at Ameren in 2005?
+question: What position did Charles Naslund hold at Ameren in 2006?
+question: What was Scott Cisel's position at Ameren in 2007?
+question: Who was Martin Lyons, Jr. in 2008?
+question: What was Adam Heflin's position at Ameren in 2009?
+question: What was Adam Heflin's position at Ameren in 2010?
+question: What was Gregory Nelson's position at Ameren in 2011?
+question: What was Gregory Nelson's position at Ameren in 2012?
+question: Who was one of Ameren's executives in 2013?
+question: Who was one of Ameren's executives in 2014?
+question: Who was one of Ameren's executives in 2015?
+question: What was Mark Birk's position at Ameren in 2016?
+question: Who was one of Ameren's executives in 2017?
+question: What was Bhavani Amirthalingam's position at Ameren in 2018?
+question: What were American Electric Power's financials in 2019?
+question: What position did McCullough hold at American Electric Power in 2019?
+question: What were American Electric Power's financials in 2020 ?
+question: Who was one of American Electric Power's executives in 2020?
+question: What were American Electric Power's financials in 2021 ?
+question: Who was one of American Electric Power's executives in 2021?
+question: What were American Electric Power's financials in 2022?
+question: Who was Peggy Simmons in 2022?
+question: What were American Electric Power's financials in 2023?
+question: Who was Peggy Simmons in 2023?
+question: What was Susan Tomasky's position at American Electric Power in 2000?
+question: What was Susan Tomasky's position at American Electric Power in 2001?
+question: Who was the Vice Chairman of American Electric Power in 2002?
+question: Who was the Vice Chairman of American Electric Power in 2003?
+question: Who was the Vice Chairman of American Electric Power in 2004?
+question: Who was the Vice Chairman of American Electric Power in 2005?
+question: What was John Keane's position at American Electric Power in 2006?
+question: What position did Carl English hold at American Electric Power in 2007?
+question: Who was one of American Electric Power's executives in 2008?
+question: Who was one of American Electric Power's executives in 2009?
+question: What was D. Miller's position at American Electric Power in 2010?
+question: What position did D. Miller hold at American Electric Power in 2011?

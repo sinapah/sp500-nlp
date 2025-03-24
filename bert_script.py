@@ -32,10 +32,27 @@ merged_df["Name"] = merged_df["Name"].fillna("")
 
 # Create a lookup dictionary for quick company name -> ticker mapping
 company_name_to_ticker = {row["Name"].lower(): row["Ticker"] for _, row in industry_df.iterrows()}
-
+ticker_to_company_name = {row["Ticker"].lower(): row["Name"] for _, row in industry_df.iterrows()}
 # Create a structured knowledge base (financials + executives)
 knowledge_base = {}
 
+# Add headquarters and industry information to the KB
+for _, row in industry_df.iterrows():
+    ticker = row["Ticker"]
+
+    if ticker not in knowledge_base:
+        knowledge_base[ticker] = {}
+
+    industry = row.get("Industry", "Unknown industry")
+    headquarters = row.get("Headquarters Location", "Unknown location")
+    founded = row.get("Founded", "Unknown foundation date")
+
+    # Store both industry and headquarters in a single sentence
+    knowledge_base[ticker]["info"] = (
+        f"{row['Name']} operates in the {industry} industry and is headquartered in {headquarters}. It was founded in {founded}"
+    )
+
+# Add financial and executives data
 for _, row in merged_df.iterrows():
     ticker = row["Ticker"]
     year = row["Fiscal Year"]
@@ -131,30 +148,85 @@ def extract_entities(question):
 
     return ticker, year, aggregate_key
 
+def is_info_question(question):
+    """
+    Determines if the question is asking for company industry or headquarters.
+    """
+    keywords = ["headquarters", "located", "office", "based", "industry", "sector", "domain", "field", "date", "founded", "foundation"]
+    lower_question = question.lower()
+
+    return any(word in lower_question for word in keywords)
+
+def is_executive_question(question):
+    """
+    Determines if a question is about executives using dependency parsing and entity recognition
+    """
+    doc = nlp(question)
+    
+    # Check for PERSON entities
+    has_person = any(ent.label_ == "PERSON" for ent in doc.ents)
+    
+    # Check for job title patterns using POS tags
+    # Common patterns for executive questions often have proper nouns (PROPN) 
+    # followed by or preceded by job-related words
+    for token in doc:
+        # Check if token is part of a job title compound
+        if token.dep_ == "compound" and token.head.pos_ == "PROPN":
+            return True
+        
+        # Check for words like "serve", "work", "lead" that often indicate role questions
+        if token.pos_ == "VERB" and token.lemma_ in {"serve", "work", "lead", "join", "head"}:
+            return True
+        
+        # Check for title-related words
+        if token.text.lower() in {"role", "position", "title", "job"}:
+            return True
+    
+    # If we found a PERSON entity, check if the question structure suggests a role query
+    if has_person:
+        for token in doc:
+            if token.dep_ == "ROOT" and token.pos_ == "VERB":
+                return True
+    
+    return False
 
 def answer_question(question):
     """
-    Determines the correct company and year using NLP, retrieves relevant context, and passes it to the QA model.
+    Handles financial, executive, and company info queries.
     """
     ticker, year, aggregate_key = extract_entities(question)
-    
-    if aggregate_key:  # If it's an aggregate query
+
+    # Handle aggregate queries
+    if aggregate_key:
         if not year:
             return "Please specify a year."
 
         result = knowledge_base.get("aggregates", {}).get(year, {}).get(aggregate_key, "No data available.")
-        if result == "No data available.":
-            return result
-        return f"The company with the {aggregate_key.replace('_', ' ')} in {year} was {result}."
-    
+        return f"The company with the {aggregate_key.replace('_', ' ')} in {year} was {result}." if result != "No data available." else result
+
     if not ticker:
         return "I couldn't determine the company you're asking about."
 
-    if not year:
-        year = max(knowledge_base[ticker].keys())  # Use latest available year if not specified
+    # Handle industry and headquarters queries
+    if is_info_question(question):
+        info = knowledge_base.get(ticker, {}).get("info", "No company info available.")
 
-    # Determine whether the question is about financials or executives
-    if any(word in question.lower() for word in ["ceo", "executive", "board member", "cfo", "president"]):
+        if info != "No company info available.":
+            # Use the QA pipeline to extract the specific answer
+            response = qa_pipeline(question=question, context=info)
+
+            # Return the extracted answer if the confidence is high
+            if response['score'] > 0.5:
+                return response['answer']
+            else:
+                return info  # Fallback to the full sentence if QA confidence is low
+
+    # Default to the latest year if none is provided
+    if not year:
+        year = max(knowledge_base[ticker].keys())
+
+    # Handle executive and financial queries
+    if is_executive_question(question):
         context = knowledge_base.get(ticker, {}).get(year, {}).get("executives", "No executive data available.")
     else:
         context = knowledge_base.get(ticker, {}).get(year, {}).get("financials", "No financial data available.")
@@ -162,18 +234,18 @@ def answer_question(question):
     if "No data available" in context:
         return context
 
-    # Use QA model to extract the answer
+    # Use the QA pipeline for the financials and executives
     response = qa_pipeline(question=question, context=context)
 
     return response['answer']
 
 # Define the JSON filename
-json_filename = "knowledge_base.json"
+'''json_filename = "knowledge_base.json"
 
 # Save knowledge_base as a JSON file
 with open(json_filename, "w", encoding="utf-8") as f:
-    json.dump(knowledge_base, f, indent=4)
-
+    json.dump(knowledge_base, f, indent=4)'''
+print(knowledge_base)
 # Example Queries
 print(answer_question("What was the revnue of Apple in 2020?"))
 print(answer_question("How much net income did Microsoft have in 2019?"))
@@ -187,3 +259,13 @@ print(answer_question("Who had the highest revenue in 2020?"))
 print(answer_question("What was the increase in net income of Apple in 2023?"))
 print(answer_question("What was the gross profit of Adobe in 2021?"))
 print(answer_question("What were Agilent Technologies financials in 2023?"))
+print(answer_question("What was Michael Tang's place at Agilent Technologies in 2019?"))
+print(answer_question("What was Samraat Raha's position at Agilent Technologies in 2020?"))
+print(answer_question("What position did Jean Nye hold at Agilent Technologies in 2003?"))
+print(answer_question("Where are the headquarters of Apple located?"))
+print(answer_question("Where are the headquarters of Adobe?"))
+print(answer_question("On what date was Apple founded?"))
+print(answer_question("What industry is Agilent Technologies in?"))
+print(answer_question("What industry is Federal Realty in?"))
+print(answer_question("What industry is American Electric Power in?"))
+print(answer_question("Where are the headquarters of American Electric Power ?"))

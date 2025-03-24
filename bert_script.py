@@ -179,7 +179,7 @@ def is_executive_question(question):
             return True
         
         # Check for title-related words
-        if token.text.lower() in {"role", "position", "title", "job"}:
+        if token.text.lower() in {"role", "position", "title", "job", "ceo"}:
             return True
     
     # If we found a PERSON entity, check if the question structure suggests a role query

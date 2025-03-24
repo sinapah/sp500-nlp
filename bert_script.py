@@ -240,11 +240,11 @@ def answer_question(question):
     return response['answer']
 
 # Define the JSON filename
-'''json_filename = "knowledge_base.json"
+json_filename = "knowledge_base.json"
 
 # Save knowledge_base as a JSON file
 with open(json_filename, "w", encoding="utf-8") as f:
-    json.dump(knowledge_base, f, indent=4)'''
+    json.dump(knowledge_base, f, indent=4)
 print(knowledge_base)
 # Example Queries
 print(answer_question("What was the revnue of Apple in 2020?"))
@@ -269,3 +269,10 @@ print(answer_question("What industry is Agilent Technologies in?"))
 print(answer_question("What industry is Federal Realty in?"))
 print(answer_question("What industry is American Electric Power in?"))
 print(answer_question("Where are the headquarters of American Electric Power ?"))
+
+with open('questions.txt', 'r') as file:
+    for line in file:
+        if 'AbbVie' not in line:
+            print(line)
+            print(answer_question(line))
+            print('\n')

@@ -128,12 +128,12 @@ def extract_entities(question):
             print(ent.label_ == "DATE")
             print(ent.text)
             year = int(ent.text) if ent.text.lower() not in company_name_to_ticker.keys() else None # Some names like AbbVie are recognized as Spacy as years
-        else:
-            possible_ticker = company_name_to_ticker.get(ent.text.lower()) or fuzzy_company_lookup(ent.text.lower(), company_name_to_ticker)
-            print("////Possible ticker: ", possible_ticker)
+        
+        possible_ticker = company_name_to_ticker.get(ent.text.lower()) or fuzzy_company_lookup(ent.text.lower(), company_name_to_ticker)
+        print("////Possible ticker: ", possible_ticker)
             
-            if possible_ticker:
-                ticker = possible_ticker
+        if possible_ticker:
+            ticker = possible_ticker
     # Detect aggregate-type questions
     aggregate_mappings = {
         "highest gross profit": "highest_gross_profit",

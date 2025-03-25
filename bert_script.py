@@ -127,8 +127,7 @@ def extract_entities(question):
         if (ent.label_ == "DATE") or re.match(r"\b(19\d{2}|20\d{2})\b", ent.text):
             print(ent.label_ == "DATE")
             print(ent.text)
-            
-            year = int(ent.text)
+            year = int(ent.text) if ent.text.lower() not in company_name_to_ticker.keys() else None # Some names like AbbVie are recognized as Spacy as years
         else:
             possible_ticker = company_name_to_ticker.get(ent.text.lower()) or fuzzy_company_lookup(ent.text.lower(), company_name_to_ticker)
             print("////Possible ticker: ", possible_ticker)
@@ -170,7 +169,7 @@ def is_executive_question(question):
     
     # Check for PERSON entities
     has_person = any(ent.label_ == "PERSON" for ent in doc.ents)
-    print("dsgs", has_person)
+    
     # Check for job title patterns using POS tags
     # Common patterns for executive questions often have proper nouns (PROPN) 
     # followed by or preceded by job-related words
@@ -184,7 +183,7 @@ def is_executive_question(question):
             return True
         
         # Check for title-related words
-        if token.text.lower() in {"role", "position", "title", "job", "ceo"}:
+        if token.text.lower() in {"role", "position", "title", "job", "ceo", "executive", "executives"}:
             return True
     
     # If we found a PERSON entity, check if the question structure suggests a role query
@@ -232,8 +231,10 @@ def answer_question(question):
 
     # Handle executive and financial queries
     if is_executive_question(question):
+        print("Executive Question")
         context = knowledge_base.get(ticker, {}).get(year, {}).get("executives", "No executive data available.")
     else:
+        print("NOT Executive Question")
         context = knowledge_base.get(ticker, {}).get(year, {}).get("financials", "No financial data available.")
 
     if "No data available" in context:
@@ -277,11 +278,9 @@ print(answer_question("Where are the headquarters of American Electric Power ?")
 
 with open('questions.txt', 'r') as file:
     for line in file:
-        #if 'AbbVie' not in line and ( 'Peggy Simmons' in line or 'Vasa Raju' in line or 'Alfred Castino' in line):
-        if 'AbbVie' not in line and "Who was one of Ameren's executives in 2015?" in line:
-            print(line)
-            print(answer_question(line))
-            print('\n')
+        print(line)
+        print(answer_question(line))
+        print('\n')
             
             
             

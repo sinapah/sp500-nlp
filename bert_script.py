@@ -117,19 +117,24 @@ def extract_entities(question):
     Uses NLP to extract company names, tickers, years, and determine if it's an aggregate query.
     """
     doc = nlp(question)
-
+    print("////doc", doc.ents)
     ticker = None
     year = None
     aggregate_key = None  # Track if the question is about an aggregate
 
     for ent in doc.ents:
-        if ent.label_ == "ORG":  # Company name
+            
+        if (ent.label_ == "DATE") or re.match(r"\b(19\d{2}|20\d{2})\b", ent.text):
+            print(ent.label_ == "DATE")
+            print(ent.text)
+            
+            year = int(ent.text)
+        else:
             possible_ticker = company_name_to_ticker.get(ent.text.lower()) or fuzzy_company_lookup(ent.text.lower(), company_name_to_ticker)
+            print("////Possible ticker: ", possible_ticker)
+            
             if possible_ticker:
                 ticker = possible_ticker
-        elif ent.label_ == "DATE" or re.match(r"\b(19\d{2}|20\d{2})\b", ent.text):
-            year = int(ent.text)
-
     # Detect aggregate-type questions
     aggregate_mappings = {
         "highest gross profit": "highest_gross_profit",
@@ -145,7 +150,7 @@ def extract_entities(question):
     if match:  # Ensure match is not None before unpacking
         best_match, _ = match  # Extract the best matching key
         aggregate_key = aggregate_mappings[best_match]
-
+   
     return ticker, year, aggregate_key
 
 def is_info_question(question):
@@ -165,7 +170,7 @@ def is_executive_question(question):
     
     # Check for PERSON entities
     has_person = any(ent.label_ == "PERSON" for ent in doc.ents)
-    
+    print("dsgs", has_person)
     # Check for job title patterns using POS tags
     # Common patterns for executive questions often have proper nouns (PROPN) 
     # followed by or preceded by job-related words
@@ -195,7 +200,7 @@ def answer_question(question):
     Handles financial, executive, and company info queries.
     """
     ticker, year, aggregate_key = extract_entities(question)
-
+    print(ticker, year, aggregate_key)
     # Handle aggregate queries
     if aggregate_key:
         if not year:
@@ -245,9 +250,9 @@ json_filename = "knowledge_base.json"
 # Save knowledge_base as a JSON file
 with open(json_filename, "w", encoding="utf-8") as f:
     json.dump(knowledge_base, f, indent=4)
-print(knowledge_base)
+
 # Example Queries
-print(answer_question("What was the revnue of Apple in 2020?"))
+'''print(answer_question("What was the revnue of Apple in 2020?"))
 print(answer_question("How much net income did Microsoft have in 2019?"))
 print(answer_question("Who was the CEO of Apple in 2021?"))
 print(answer_question("What was the revenue of Visa in 2020"))
@@ -268,11 +273,15 @@ print(answer_question("On what date was Apple founded?"))
 print(answer_question("What industry is Agilent Technologies in?"))
 print(answer_question("What industry is Federal Realty in?"))
 print(answer_question("What industry is American Electric Power in?"))
-print(answer_question("Where are the headquarters of American Electric Power ?"))
+print(answer_question("Where are the headquarters of American Electric Power ?"))'''
 
 with open('questions.txt', 'r') as file:
     for line in file:
-        if 'AbbVie' not in line:
+        #if 'AbbVie' not in line and ( 'Peggy Simmons' in line or 'Vasa Raju' in line or 'Alfred Castino' in line):
+        if 'AbbVie' not in line and "Who was one of Ameren's executives in 2015?" in line:
             print(line)
             print(answer_question(line))
             print('\n')
+            
+            
+            

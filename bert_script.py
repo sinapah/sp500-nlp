@@ -34,72 +34,9 @@ merged_df["Name"] = merged_df["Name"].fillna("")
 company_name_to_ticker = {row["Name"].lower(): row["Ticker"] for _, row in industry_df.iterrows()}
 ticker_to_company_name = {row["Ticker"].lower(): row["Name"] for _, row in industry_df.iterrows()}
 # Create a structured knowledge base (financials + executives)
-knowledge_base = {}
 
-# Add headquarters and industry information to the KB
-for _, row in industry_df.iterrows():
-    ticker = row["Ticker"]
-
-    if ticker not in knowledge_base:
-        knowledge_base[ticker] = {}
-
-    industry = row.get("Industry", "Unknown industry")
-    headquarters = row.get("Headquarters Location", "Unknown location")
-    founded = row.get("Founded", "Unknown foundation date")
-
-    # Store both industry and headquarters in a single sentence
-    knowledge_base[ticker]["info"] = (
-        f"{row['Name']} operates in the {industry} industry and is headquartered in {headquarters}. It was founded in {founded}"
-    )
-
-# Add financial and executives data
-for _, row in merged_df.iterrows():
-    ticker = row["Ticker"]
-    year = row["Fiscal Year"]
-
-    if ticker not in knowledge_base:
-        knowledge_base[ticker] = {}
-
-    knowledge_base[ticker][year] = {
-        "financials": (
-            f"In {year}, {row['Name']} had {row['Shares (Basic)']} shares outstanding, "
-            f"reported a revenue of ${row['Revenue']}, "
-            f"a gross profit of ${row['Gross Profit']}, "
-            f"and a net income of ${row['Net Income']}, "
-            f"and it's increase in gross profit was ${row['increase_in_gross_profit']}, "
-            f"and it's increase in operating expense was ${row['increase_in_operating_expense']}, "
-            f"and it's increase in net income was ${row['Increase_in_Net_Income']}"
-        )
-    }
-
-# Add executive information to the knowledge base
-for _, row in executive_df.iterrows():
-    ticker = row["Ticker"]
-    year = row["year"]
-
-    if ticker not in knowledge_base:
-        knowledge_base[ticker] = {}
-
-    if year not in knowledge_base[ticker]:
-        knowledge_base[ticker][year] = {}
-
-    knowledge_base[ticker][year]["executives"] = (
-        f"In {year}, {row['exec_fname']} {row['exec_lname']} served as {row['title']} at {ticker}."
-    )
-
-# Initialize an aggregate section in the knowledge base
-for _, row in aggregated_data.iterrows():
-    year = row["Year"]
-    if "aggregates" not in knowledge_base:
-        knowledge_base["aggregates"] = {}
-
-    knowledge_base["aggregates"][year] = {
-        "highest_gross_profit": row["highest_gross_profit"],  
-        "highest_income": row["Company_with_highest_income"],  
-        "highest_increase_in_gross_profit": row["highest_increase_in_gross_profit"],
-        "highest_operating_expense": row["highest_operating_expense"],
-        "highest_revenue": row["Company_with_highest_revenue"]
-    }
+with open('knowledge_base.json', 'r') as file:
+    knowledge_base = json.load(file)
 
 # Load a pre-trained QA model
 qa_pipeline = pipeline("question-answering", model="distilbert-base-cased-distilled-squad")
@@ -130,7 +67,6 @@ def extract_entities(question):
             year = int(ent.text) if ent.text.lower() not in company_name_to_ticker.keys() else None # Some names like AbbVie are recognized as Spacy as years
         
         possible_ticker = company_name_to_ticker.get(ent.text.lower()) or fuzzy_company_lookup(ent.text.lower(), company_name_to_ticker)
-        print("////Possible ticker: ", possible_ticker)
             
         if possible_ticker:
             ticker = possible_ticker
@@ -205,7 +141,7 @@ def answer_question(question):
         if not year:
             return "Please specify a year."
 
-        result = knowledge_base.get("aggregates", {}).get(year, {}).get(aggregate_key, "No data available.")
+        result = knowledge_base.get("aggregates", {}).get(str(year), {}).get(aggregate_key, "No data available.")
         return f"The company with the {aggregate_key.replace('_', ' ')} in {year} was {result}." if result != "No data available." else result
 
     if not ticker:
@@ -232,10 +168,10 @@ def answer_question(question):
     # Handle executive and financial queries
     if is_executive_question(question):
         print("Executive Question")
-        context = knowledge_base.get(ticker, {}).get(year, {}).get("executives", "No executive data available.")
+        context = knowledge_base.get(ticker, {}).get(str(year), {}).get("executives", "No executive data available.")
     else:
         print("NOT Executive Question")
-        context = knowledge_base.get(ticker, {}).get(year, {}).get("financials", "No financial data available.")
+        context = knowledge_base.get(ticker, {}).get(str(year), {}).get("financials", "No financial data available.")
 
     if "No data available" in context:
         return context
@@ -245,15 +181,11 @@ def answer_question(question):
 
     return response['answer']
 
-# Define the JSON filename
-json_filename = "knowledge_base.json"
-
-# Save knowledge_base as a JSON file
-with open(json_filename, "w", encoding="utf-8") as f:
-    json.dump(knowledge_base, f, indent=4)
-
 # Example Queries
-'''print(answer_question("What was the revnue of Apple in 2020?"))
+'''print(answer_question("What was the revenue of Apple in 2020?"))
+print(answer_question("Who was the CEO of Apple in 2020?"))
+print(answer_question("Who had the highest revenue in 2020?"))
+print(knowledge_base.get('AAPL', {}).get('2020', {}).get("financials", "No financial data available."))
 print(answer_question("How much net income did Microsoft have in 2019?"))
 print(answer_question("Who was the CEO of Apple in 2021?"))
 print(answer_question("What was the revenue of Visa in 2020"))

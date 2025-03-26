@@ -194,10 +194,11 @@ def answer_question(question):
     return response['answer']
 
 # Example Queries
-print(answer_question("What was the revenue of Apple in 2020?"))
-print(answer_question("Who was the CEO of Apple in 2020?"))
-print(answer_question("Who had the highest revenue in 2020?"))
+#print(knowledge_base)
 print(knowledge_base.get('AAPL', {}).get('2020', {}).get("financials", "No financial data available."))
+print(answer_question("What was the revenue of Apple in 2020?"))
+'''print(answer_question("Who was the CEO of Apple in 2020?"))
+print(answer_question("Who had the highest revenue in 2020?"))
 print(answer_question("How much net income did Microsoft have in 2019?"))
 print(answer_question("Who was the CEO of Apple in 2021?"))
 print(answer_question("What was the revenue of Visa in 2020"))
@@ -220,11 +221,6 @@ print(answer_question("What industry is Federal Realty in?"))
 print(answer_question("What industry is American Electric Power in?"))
 print(answer_question("Where are the headquarters of American Electric Power ?"))
 
-'''with open('questions.txt', 'r') as file:
-    for line in file:
-        print(line)
-        print(answer_question(line))
-        print('\n')'''
 print(answer_question("What was the largest industry in 2016?"))
 print(answer_question("What was the second largest industry in 2016?"))
 print(answer_question("What was the third largest industry in 2015?"))
@@ -235,8 +231,11 @@ print(answer_question("Which industry had the most investment in 2018?"))
 print(answer_question("Which industry had the second most investment in 2007?"))
 print(answer_question("Which industry had the least investment in 2008?"))
 print(answer_question("Which industry had the third most investment in 2003?"))
-print(answer_question("Which industry had the second least investment in 2004?"))
-
+print(answer_question("Which industry had the second least investment in 2004?"))'''
             
-            
+'''with open('questions.txt', 'r') as file:
+    for line in file:
+        print(line)
+        print(answer_question(line))
+        print('\n')'''
             

@@ -92,13 +92,34 @@ def extract_entities(question):
         "second least investment": "industry_with_the_second_least_invesmtent",
         "third least investment": "industry_with_the_third_least_invesmtent"
     }
+    
+    ordinal_terms = {
+        "second largest": "second_largest_industry",
+        "third largest": "third_largest_industry",
+        "second smallest": "second_smallest_industry",
+        "third smallest": "third_smallest_industry",
+        "second most": "industry_with_the_second_most_invesmtent",
+        "third most": "industry_with_the_third_invesmtent",
+        "second least": "industry_with_the_second_least_invesmtent",
+        "third least": "industry_with_the_third_least_invesmtent"
+    }
+    
     # Use fuzzy matching to determine the best match
-    match = process.extractOne(question.lower(), aggregate_mappings.keys(), score_cutoff=90)
-
-    if match:  # Ensure match is not None before unpacking
-        best_match, _ = match  # Extract the best matching key
-        aggregate_key = aggregate_mappings[best_match]
-
+    # Try to match ordinal terms like "third largest industry"
+    for term, key in ordinal_terms.items():
+        if term in question.lower():
+            print("Term", term)
+            print(question.lower)
+            aggregate_key = key
+            break
+    
+    # If no ordinal term is found, fall back to fuzzy matching
+    if not aggregate_key:
+        match = process.extractOne(question.lower(), aggregate_mappings.keys(), score_cutoff=90)
+        if match:
+            best_match, _ = match
+            aggregate_key = aggregate_mappings[best_match]
+    print(aggregate_key)
     return ticker, year, aggregate_key
 
 def is_executive_question(question):

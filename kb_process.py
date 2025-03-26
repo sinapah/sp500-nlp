@@ -179,7 +179,7 @@ for year in most_investments_by_year["Fiscal Year"].unique():
   
     most_investments_dict[year] = {
         "industry_with_the_most_invesmtent": most,
-        "industry_with_the__second_most_invesmtent": second_most,
+        "industry_with_the_second_most_invesmtent": second_most,
         "industry_with_the_third_most_invesmtent": third_most,
     }
         
@@ -193,8 +193,8 @@ for year in least_investments_by_year["Fiscal Year"].unique():
   
     least_investments_dict[year] = {
         "industry_with_the_least_invesmtent": least,
-        "industry_with_the__second_least_invesmtent": second_least,
-        "industry_with_the__third_least_invesmtent": third_least,
+        "industry_with_the_second_least_invesmtent": second_least,
+        "industry_with_the_third_least_invesmtent": third_least,
     }
     
 # ===========================
@@ -224,8 +224,8 @@ for year in all_years:
         }),
         **most_investments_dict.get(year, {
             "industry_with_the_most_invesmtent": "No data",
-            "industry_with_the__second_most_invesmtent": "No data",
-            "industry_with_the__third_most_invesmtent": "No data"
+            "industry_with_the_second_most_invesmtent": "No data",
+            "industry_with_the_third_most_invesmtent": "No data"
         }),
         **least_investments_dict.get(year, {
             "industry_with_the_least_invesmtent": "No data",

@@ -8,26 +8,28 @@ Created on Mon Mar 24 18:33:18 2025
 import pandas as pd
 import json
 
-# Load datasets
+# ===========================
+# 📌 Load datasets
+# ===========================
 industry_df = pd.read_csv("sp500-companies.csv", encoding='ISO-8859-1')
 finance_df = pd.read_csv("Financials_SP500.csv", encoding='ISO-8859-1')
 executive_df = pd.read_csv("sp500_firm_execu.csv", encoding='ISO-8859-1')
 aggregated_data = pd.read_csv("aggregated_stats.csv", encoding='ISO-8859-1')
+balance_df = pd.read_csv("us-balance-annual.csv", encoding="ISO-8859-1", sep=';')
 
+# ===========================
+# 📌 Preprocessing
+# ===========================
+# Rename columns for consistency
 executive_df = executive_df.rename(columns={'tic': 'Ticker'})
 
 # Standardize tickers
-for df in [finance_df, industry_df, executive_df]:
+for df in [finance_df, industry_df, executive_df, balance_df]:
     df["Ticker"] = df["Ticker"].astype(str).str.strip().str.upper()
 
-# Merge finance_df with industry_df to get company names
-merged_df = finance_df.merge(industry_df[['Ticker']], on="Ticker", how="left")
-merged_df["Name"] = merged_df["Name"].fillna("")
-
-# Create a lookup dictionary for quick company name -> ticker mapping
-company_name_to_ticker = {row["Name"].lower(): row["Ticker"] for _, row in industry_df.iterrows()}
-ticker_to_company_name = {row["Ticker"].lower(): row["Name"] for _, row in industry_df.iterrows()}
-# Create a structured knowledge base (financials + executives)
+# ===========================
+# 📌 Create the Knowledge Base
+# ===========================
 knowledge_base = {}
 
 # Add headquarters and industry information to the KB
@@ -43,10 +45,13 @@ for _, row in industry_df.iterrows():
 
     # Store both industry and headquarters in a single sentence
     knowledge_base[ticker]["info"] = (
-        f"{row['Name']} operates in the {industry} industry and is headquartered in {headquarters}. It was founded in {founded}"
+        f"{row['Name']} operates in the {industry} industry and is headquartered in {headquarters}. "
+        f"It was founded in {founded}."
     )
 
-# Add financial and executives data
+# Add financial and executive data
+merged_df = finance_df.merge(industry_df[['Ticker', 'Industry']], on="Ticker", how="left")
+
 for _, row in merged_df.iterrows():
     ticker = row["Ticker"]
     year = row["Fiscal Year"]
@@ -60,13 +65,13 @@ for _, row in merged_df.iterrows():
             f"reported a revenue of ${row['Revenue']}, "
             f"a gross profit of ${row['Gross Profit']}, "
             f"and a net income of ${row['Net Income']}, "
-            f"and it's increase in gross profit was ${row['increase_in_gross_profit']}, "
-            f"and it's increase in operating expense was ${row['increase_in_operating_expense']}, "
-            f"and it's increase in net income was ${row['Increase_in_Net_Income']}"
+            f"with an increase in gross profit of ${row['increase_in_gross_profit']}, "
+            f"an increase in operating expense of ${row['increase_in_operating_expense']}, "
+            f"and an increase in net income of ${row['Increase_in_Net_Income']}."
         )
     }
 
-# Add executive information to the knowledge base
+# Add executive information
 for _, row in executive_df.iterrows():
     ticker = row["Ticker"]
     year = row["year"]
@@ -81,18 +86,94 @@ for _, row in executive_df.iterrows():
         f"In {year}, {row['exec_fname']} {row['exec_lname']} served as {row['title']} at {ticker}."
     )
 
-# Initialize an aggregate section in the knowledge base
-for _, row in aggregated_data.iterrows():
-    year = row["Year"]
+# ===========================
+# 📌 Find the 1st, 2nd, and 3rd Largest Industries by Assets Per Year
+# ===========================
+
+# Merge balance and industry data
+merged_assets_df = balance_df.merge(industry_df[["Ticker", "Industry"]], on="Ticker", how="left")
+
+# Group by year and industry, summing up the total assets
+industry_assets = (
+    merged_assets_df.groupby(["Fiscal Year", "Industry"])["Total Assets"]
+    .sum()
+    .reset_index()
+)
+
+# Sort by year and descending assets
+industry_assets = industry_assets.sort_values(["Fiscal Year", "Total Assets"], ascending=[True, False])
+
+# Collect the top 3 industries for each year
+largest_industries_by_year = (
+    industry_assets.groupby("Fiscal Year")
+    .apply(lambda x: x.nlargest(3, "Total Assets"))
+    .reset_index(drop=True)
+)
+
+smallest_industries_by_year = (
+    industry_assets.groupby("Fiscal Year")
+    .apply(lambda x: x.nsmallest(3, "Total Assets"))
+    .reset_index(drop=True)
+)
+
+# Prepare a dictionary for easy lookup
+largest_industries_dict = {}
+smallest_industries_dict = {}
+
+# Iterate through the DataFrame and store 1st, 2nd, and 3rd largest industries by year
+for year in largest_industries_by_year["Fiscal Year"].unique():
+    top_industries = largest_industries_by_year[largest_industries_by_year["Fiscal Year"] == year]
+
+    largest = top_industries.iloc[0]["Industry"] if len(top_industries) > 0 else "No data"
+    second_largest = top_industries.iloc[1]["Industry"] if len(top_industries) > 1 else "No data"
+    third_largest = top_industries.iloc[2]["Industry"] if len(top_industries) > 2 else "No data"
+  
+    largest_industries_dict[year] = {
+        "largest_industry": largest,
+        "second_largest_industry": second_largest,
+        "third_largest_industry": third_largest,
+    }
+    
+# Iterate through the DataFrame and store 1st, 2nd, and 3rd smallest industries by year
+for year in smallest_industries_by_year["Fiscal Year"].unique():
+    top_industries = smallest_industries_by_year[smallest_industries_by_year["Fiscal Year"] == year]
+
+    smallest = top_industries.iloc[0]["Industry"] if len(top_industries) > 0 else "No data"
+    second_smallest = top_industries.iloc[1]["Industry"] if len(top_industries) > 1 else "No data"
+    third_smallest = top_industries.iloc[2]["Industry"] if len(top_industries) > 2 else "No data"
+  
+    smallest_industries_dict[year] = {
+        "smallest_industry": smallest,
+        "second_smallest_industry": second_smallest,
+        "third_smallest_industry": third_smallest,
+    }
+        
+
+# ===========================
+# 📌 Add Aggregates to the Knowledge Base for All Years
+# ===========================
+all_years = sorted(set(aggregated_data["Year"]).union(largest_industries_by_year["Fiscal Year"]))
+
+for year in all_years:
     if "aggregates" not in knowledge_base:
         knowledge_base["aggregates"] = {}
 
     knowledge_base["aggregates"][year] = {
-        "highest_gross_profit": row["highest_gross_profit"],  
-        "highest_income": row["Company_with_highest_income"],  
-        "highest_increase_in_gross_profit": row["highest_increase_in_gross_profit"],
-        "highest_operating_expense": row["highest_operating_expense"],
-        "highest_revenue": row["Company_with_highest_revenue"]
+        "highest_gross_profit": aggregated_data.loc[aggregated_data["Year"] == year, "highest_gross_profit"].values[0] if year in aggregated_data["Year"].values else "No data",
+        "highest_income": aggregated_data.loc[aggregated_data["Year"] == year, "Company_with_highest_income"].values[0] if year in aggregated_data["Year"].values else "No data",
+        "highest_increase_in_gross_profit": aggregated_data.loc[aggregated_data["Year"] == year, "highest_increase_in_gross_profit"].values[0] if year in aggregated_data["Year"].values else "No data",
+        "highest_operating_expense": aggregated_data.loc[aggregated_data["Year"] == year, "highest_operating_expense"].values[0] if year in aggregated_data["Year"].values else "No data",
+        "highest_revenue": aggregated_data.loc[aggregated_data["Year"] == year, "Company_with_highest_revenue"].values[0] if year in aggregated_data["Year"].values else "No data",
+        **largest_industries_dict.get(year, {
+            "largest_industry": "No data",
+            "second_largest_industry": "No data",
+            "third_largest_industry": "No data"
+        }),
+        **smallest_industries_dict.get(year, {
+            "smallest_industry": "No data",
+            "second_smallest_industry": "No data",
+            "third_smallest_industry": "No data"
+        })
     }
     
 # Define the JSON filename

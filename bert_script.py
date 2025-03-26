@@ -76,7 +76,13 @@ def extract_entities(question):
         "highest revenue": "highest_revenue",
         "highest net income": "highest_net_income",
         "highest operating expense": "highest_operating_expense",
-        "highest increase in gross profit": "highest_increase_in_gross_profit"
+        "highest increase in gross profit": "highest_increase_in_gross_profit",
+        "largest industry": "largest_industry",
+        "second largest industry": "second_largest_industry",
+        "third largest industry": "third_largest_industry",
+        "smallest industry": "smallest_industry",
+        "second smallest industry": "second_smallest_industry",
+        "third smallest industry": "third_smallest_industry"
     }
 
     # Use fuzzy matching to determine the best match
@@ -182,7 +188,7 @@ def answer_question(question):
     return response['answer']
 
 # Example Queries
-'''print(answer_question("What was the revenue of Apple in 2020?"))
+print(answer_question("What was the revenue of Apple in 2020?"))
 print(answer_question("Who was the CEO of Apple in 2020?"))
 print(answer_question("Who had the highest revenue in 2020?"))
 print(knowledge_base.get('AAPL', {}).get('2020', {}).get("financials", "No financial data available."))
@@ -206,13 +212,23 @@ print(answer_question("On what date was Apple founded?"))
 print(answer_question("What industry is Agilent Technologies in?"))
 print(answer_question("What industry is Federal Realty in?"))
 print(answer_question("What industry is American Electric Power in?"))
-print(answer_question("Where are the headquarters of American Electric Power ?"))'''
+print(answer_question("Where are the headquarters of American Electric Power ?"))
 
-with open('questions.txt', 'r') as file:
+'''with open('questions.txt', 'r') as file:
     for line in file:
         print(line)
         print(answer_question(line))
-        print('\n')
+        print('\n')'''
+print(answer_question("What was the largest industry in 2016?"))
+print(answer_question("What was the second largest industry in 2016?"))
+print(answer_question("What was the third largest industry in 2015?"))
+print(answer_question("What was the smallest industry in 2006?"))
+print(answer_question("What was the third largets industry in 2004?"))
+print(answer_question("What was the third smallest industry in 2018?"))
+#print(answer_question("What was the largest industry in 2016?"))
+#print(answer_question("What was the largest industry in 2016?"))
+#print(answer_question("What was the largest industry in 2016?"))
+
             
             
             

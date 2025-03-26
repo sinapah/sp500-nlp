@@ -87,7 +87,7 @@ for _, row in executive_df.iterrows():
     )
 
 # ===========================
-# 📌 Find the 1st, 2nd, and 3rd Largest Industries by Assets Per Year
+# 📌 Find the 1st, 2nd, and 3rd Largest and smallest Industries by Assets and Investments Per Year
 # ===========================
 
 # Merge balance and industry data
@@ -100,8 +100,16 @@ industry_assets = (
     .reset_index()
 )
 
+industry_investments = (
+    merged_assets_df.groupby(["Fiscal Year", "Industry"])["Long Term Investments & Receivables"]
+    .sum()
+    .reset_index()
+)
+
 # Sort by year and descending assets
 industry_assets = industry_assets.sort_values(["Fiscal Year", "Total Assets"], ascending=[True, False])
+industry_investments = industry_investments.sort_values(["Fiscal Year", "Long Term Investments & Receivables"], ascending=[True, False])
+
 
 # Collect the top 3 industries for each year
 largest_industries_by_year = (
@@ -116,9 +124,23 @@ smallest_industries_by_year = (
     .reset_index(drop=True)
 )
 
+most_investments_by_year = (
+    industry_investments.groupby("Fiscal Year")
+    .apply(lambda x: x.nlargest(3, "Long Term Investments & Receivables"))
+    .reset_index(drop=True)
+)
+
+least_investments_by_year = (
+    industry_investments.groupby("Fiscal Year")
+    .apply(lambda x: x.nsmallest(3, "Long Term Investments & Receivables"))
+    .reset_index(drop=True)
+)
+
 # Prepare a dictionary for easy lookup
 largest_industries_dict = {}
 smallest_industries_dict = {}
+most_investments_dict = {}
+least_investments_dict = {}
 
 # Iterate through the DataFrame and store 1st, 2nd, and 3rd largest industries by year
 for year in largest_industries_by_year["Fiscal Year"].unique():
@@ -134,7 +156,6 @@ for year in largest_industries_by_year["Fiscal Year"].unique():
         "third_largest_industry": third_largest,
     }
     
-# Iterate through the DataFrame and store 1st, 2nd, and 3rd smallest industries by year
 for year in smallest_industries_by_year["Fiscal Year"].unique():
     top_industries = smallest_industries_by_year[smallest_industries_by_year["Fiscal Year"] == year]
 
@@ -147,8 +168,35 @@ for year in smallest_industries_by_year["Fiscal Year"].unique():
         "second_smallest_industry": second_smallest,
         "third_smallest_industry": third_smallest,
     }
-        
+    
+# Iterate through the DataFrame and store 1st, 2nd, and 3rd smallest industries by year
+for year in most_investments_by_year["Fiscal Year"].unique():
+    top_industries = most_investments_by_year[most_investments_by_year["Fiscal Year"] == year]
 
+    most = top_industries.iloc[0]["Industry"] if len(top_industries) > 0 else "No data"
+    second_most = top_industries.iloc[1]["Industry"] if len(top_industries) > 1 else "No data"
+    third_most = top_industries.iloc[2]["Industry"] if len(top_industries) > 2 else "No data"
+  
+    most_investments_dict[year] = {
+        "industry_with_the_most_invesmtent": most,
+        "industry_with_the__second_most_invesmtent": second_most,
+        "industry_with_the_third_most_invesmtent": third_most,
+    }
+        
+# Iterate through the DataFrame and store 1st, 2nd, and 3rd indutries by year based on investments
+for year in least_investments_by_year["Fiscal Year"].unique():
+    top_industries = least_investments_by_year[least_investments_by_year["Fiscal Year"] == year]
+
+    least = top_industries.iloc[0]["Industry"] if len(top_industries) > 0 else "No data"
+    second_least = top_industries.iloc[1]["Industry"] if len(top_industries) > 1 else "No data"
+    third_least = top_industries.iloc[2]["Industry"] if len(top_industries) > 2 else "No data"
+  
+    least_investments_dict[year] = {
+        "industry_with_the_least_invesmtent": least,
+        "industry_with_the__second_least_invesmtent": second_least,
+        "industry_with_the__third_least_invesmtent": third_least,
+    }
+    
 # ===========================
 # 📌 Add Aggregates to the Knowledge Base for All Years
 # ===========================
@@ -173,6 +221,16 @@ for year in all_years:
             "smallest_industry": "No data",
             "second_smallest_industry": "No data",
             "third_smallest_industry": "No data"
+        }),
+        **most_investments_dict.get(year, {
+            "industry_with_the_most_invesmtent": "No data",
+            "industry_with_the__second_most_invesmtent": "No data",
+            "industry_with_the__third_most_invesmtent": "No data"
+        }),
+        **least_investments_dict.get(year, {
+            "industry_with_the_least_invesmtent": "No data",
+            "industry_with_the_second_least_invesmtent": "No data",
+            "industry_with_the_thid_least_invesmtent": "No data"
         })
     }
     

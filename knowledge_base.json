@@ -36441,7 +36441,13 @@
             "third_largest_industry": "No data",
             "smallest_industry": "Consumer Discretionary",
             "second_smallest_industry": "No data",
-            "third_smallest_industry": "No data"
+            "third_smallest_industry": "No data",
+            "industry_with_the_most_invesmtent": "Consumer Discretionary",
+            "industry_with_the__second_most_invesmtent": "No data",
+            "industry_with_the_third_most_invesmtent": "No data",
+            "industry_with_the_least_invesmtent": "Consumer Discretionary",
+            "industry_with_the__second_least_invesmtent": "No data",
+            "industry_with_the__third_least_invesmtent": "No data"
         },
         "1993": {
             "highest_gross_profit": "No data",
@@ -36454,7 +36460,13 @@
             "third_largest_industry": "No data",
             "smallest_industry": "Consumer Discretionary",
             "second_smallest_industry": "No data",
-            "third_smallest_industry": "No data"
+            "third_smallest_industry": "No data",
+            "industry_with_the_most_invesmtent": "Consumer Discretionary",
+            "industry_with_the__second_most_invesmtent": "No data",
+            "industry_with_the_third_most_invesmtent": "No data",
+            "industry_with_the_least_invesmtent": "Consumer Discretionary",
+            "industry_with_the__second_least_invesmtent": "No data",
+            "industry_with_the__third_least_invesmtent": "No data"
         },
         "1994": {
             "highest_gross_profit": "No data",
@@ -36467,7 +36479,13 @@
             "third_largest_industry": "No data",
             "smallest_industry": "Consumer Discretionary",
             "second_smallest_industry": "No data",
-            "third_smallest_industry": "No data"
+            "third_smallest_industry": "No data",
+            "industry_with_the_most_invesmtent": "Consumer Discretionary",
+            "industry_with_the__second_most_invesmtent": "No data",
+            "industry_with_the_third_most_invesmtent": "No data",
+            "industry_with_the_least_invesmtent": "Consumer Discretionary",
+            "industry_with_the__second_least_invesmtent": "No data",
+            "industry_with_the__third_least_invesmtent": "No data"
         },
         "1995": {
             "highest_gross_profit": "No data",
@@ -36480,7 +36498,13 @@
             "third_largest_industry": "No data",
             "smallest_industry": "Consumer Discretionary",
             "second_smallest_industry": "No data",
-            "third_smallest_industry": "No data"
+            "third_smallest_industry": "No data",
+            "industry_with_the_most_invesmtent": "Consumer Discretionary",
+            "industry_with_the__second_most_invesmtent": "No data",
+            "industry_with_the_third_most_invesmtent": "No data",
+            "industry_with_the_least_invesmtent": "Consumer Discretionary",
+            "industry_with_the__second_least_invesmtent": "No data",
+            "industry_with_the__third_least_invesmtent": "No data"
         },
         "1996": {
             "highest_gross_profit": "No data",
@@ -36493,7 +36517,13 @@
             "third_largest_industry": "No data",
             "smallest_industry": "Consumer Discretionary",
             "second_smallest_industry": "No data",
-            "third_smallest_industry": "No data"
+            "third_smallest_industry": "No data",
+            "industry_with_the_most_invesmtent": "Consumer Discretionary",
+            "industry_with_the__second_most_invesmtent": "No data",
+            "industry_with_the_third_most_invesmtent": "No data",
+            "industry_with_the_least_invesmtent": "Consumer Discretionary",
+            "industry_with_the__second_least_invesmtent": "No data",
+            "industry_with_the__third_least_invesmtent": "No data"
         },
         "1997": {
             "highest_gross_profit": "No data",
@@ -36506,7 +36536,13 @@
             "third_largest_industry": "Health Care",
             "smallest_industry": "Health Care",
             "second_smallest_industry": "Consumer Discretionary",
-            "third_smallest_industry": "Industrials"
+            "third_smallest_industry": "Industrials",
+            "industry_with_the_most_invesmtent": "Industrials",
+            "industry_with_the__second_most_invesmtent": "Consumer Discretionary",
+            "industry_with_the_third_most_invesmtent": "Health Care",
+            "industry_with_the_least_invesmtent": "Consumer Discretionary",
+            "industry_with_the__second_least_invesmtent": "Health Care",
+            "industry_with_the__third_least_invesmtent": "Industrials"
         },
         "1998": {
             "highest_gross_profit": "No data",
@@ -36519,7 +36555,13 @@
             "third_largest_industry": "Materials",
             "smallest_industry": "Consumer Staples",
             "second_smallest_industry": "Information Technology",
-            "third_smallest_industry": "Consumer Discretionary"
+            "third_smallest_industry": "Consumer Discretionary",
+            "industry_with_the_most_invesmtent": "Industrials",
+            "industry_with_the__second_most_invesmtent": "Materials",
+            "industry_with_the_third_most_invesmtent": "Health Care",
+            "industry_with_the_least_invesmtent": "Consumer Discretionary",
+            "industry_with_the__second_least_invesmtent": "Consumer Staples",
+            "industry_with_the__third_least_invesmtent": "Information Technology"
         },
         "1999": {
             "highest_gross_profit": "No data",
@@ -36532,7 +36574,13 @@
             "third_largest_industry": "Industrials",
             "smallest_industry": "Financials",
             "second_smallest_industry": "Energy",
-            "third_smallest_industry": "Materials"
+            "third_smallest_industry": "Materials",
+            "industry_with_the_most_invesmtent": "Information Technology",
+            "industry_with_the__second_most_invesmtent": "Industrials",
+            "industry_with_the_third_most_invesmtent": "Materials",
+            "industry_with_the_least_invesmtent": "Consumer Discretionary",
+            "industry_with_the__second_least_invesmtent": "Consumer Staples",
+            "industry_with_the__third_least_invesmtent": "Financials"
         },
         "2000": {
             "highest_gross_profit": "No data",
@@ -36545,7 +36593,13 @@
             "third_largest_industry": "Consumer Staples",
             "smallest_industry": "Financials",
             "second_smallest_industry": "Real Estate",
-            "third_smallest_industry": "Materials"
+            "third_smallest_industry": "Materials",
+            "industry_with_the_most_invesmtent": "Energy",
+            "industry_with_the__second_most_invesmtent": "Industrials",
+            "industry_with_the_third_most_invesmtent": "Materials",
+            "industry_with_the_least_invesmtent": "Communication Services",
+            "industry_with_the__second_least_invesmtent": "Real Estate",
+            "industry_with_the__third_least_invesmtent": "Consumer Discretionary"
         },
         "2001": {
             "highest_gross_profit": "No data",
@@ -36558,7 +36612,13 @@
             "third_largest_industry": "Information Technology",
             "smallest_industry": "Financials",
             "second_smallest_industry": "Real Estate",
-            "third_smallest_industry": "Materials"
+            "third_smallest_industry": "Materials",
+            "industry_with_the_most_invesmtent": "Information Technology",
+            "industry_with_the__second_most_invesmtent": "Energy",
+            "industry_with_the_third_most_invesmtent": "Industrials",
+            "industry_with_the_least_invesmtent": "Real Estate",
+            "industry_with_the__second_least_invesmtent": "Financials",
+            "industry_with_the__third_least_invesmtent": "Communication Services"
         },
         "2002": {
             "highest_gross_profit": "No data",
@@ -36571,7 +36631,13 @@
             "third_largest_industry": "Information Technology",
             "smallest_industry": "Financials",
             "second_smallest_industry": "Real Estate",
-            "third_smallest_industry": "Materials"
+            "third_smallest_industry": "Materials",
+            "industry_with_the_most_invesmtent": "Industrials",
+            "industry_with_the__second_most_invesmtent": "Consumer Discretionary",
+            "industry_with_the_third_most_invesmtent": "Information Technology",
+            "industry_with_the_least_invesmtent": "Real Estate",
+            "industry_with_the__second_least_invesmtent": "Financials",
+            "industry_with_the__third_least_invesmtent": "Consumer Staples"
         },
         "2003": {
             "highest_gross_profit": "No data",
@@ -36584,7 +36650,13 @@
             "third_largest_industry": "Consumer Discretionary",
             "smallest_industry": "Financials",
             "second_smallest_industry": "Real Estate",
-            "third_smallest_industry": "Materials"
+            "third_smallest_industry": "Materials",
+            "industry_with_the_most_invesmtent": "Industrials",
+            "industry_with_the__second_most_invesmtent": "Information Technology",
+            "industry_with_the_third_most_invesmtent": "Energy",
+            "industry_with_the_least_invesmtent": "Real Estate",
+            "industry_with_the__second_least_invesmtent": "Consumer Staples",
+            "industry_with_the__third_least_invesmtent": "Financials"
         },
         "2004": {
             "highest_gross_profit": "No data",
@@ -36597,7 +36669,13 @@
             "third_largest_industry": "Consumer Discretionary",
             "smallest_industry": "Real Estate",
             "second_smallest_industry": "Financials",
-            "third_smallest_industry": "Materials"
+            "third_smallest_industry": "Materials",
+            "industry_with_the_most_invesmtent": "Industrials",
+            "industry_with_the__second_most_invesmtent": "Communication Services",
+            "industry_with_the_third_most_invesmtent": "Energy",
+            "industry_with_the_least_invesmtent": "Real Estate",
+            "industry_with_the__second_least_invesmtent": "Consumer Staples",
+            "industry_with_the__third_least_invesmtent": "Financials"
         },
         "2005": {
             "highest_gross_profit": "No data",
@@ -36610,7 +36688,13 @@
             "third_largest_industry": "Information Technology",
             "smallest_industry": "Real Estate",
             "second_smallest_industry": "Financials",
-            "third_smallest_industry": "Materials"
+            "third_smallest_industry": "Materials",
+            "industry_with_the_most_invesmtent": "Industrials",
+            "industry_with_the__second_most_invesmtent": "Energy",
+            "industry_with_the_third_most_invesmtent": "Communication Services",
+            "industry_with_the_least_invesmtent": "Real Estate",
+            "industry_with_the__second_least_invesmtent": "Financials",
+            "industry_with_the__third_least_invesmtent": "Consumer Staples"
         },
         "2006": {
             "highest_gross_profit": "No data",
@@ -36623,7 +36707,13 @@
             "third_largest_industry": "Communication Services",
             "smallest_industry": "Real Estate",
             "second_smallest_industry": "Materials",
-            "third_smallest_industry": "Financials"
+            "third_smallest_industry": "Financials",
+            "industry_with_the_most_invesmtent": "Consumer Discretionary",
+            "industry_with_the__second_most_invesmtent": "Industrials",
+            "industry_with_the_third_most_invesmtent": "Energy",
+            "industry_with_the_least_invesmtent": "Real Estate",
+            "industry_with_the__second_least_invesmtent": "Financials",
+            "industry_with_the__third_least_invesmtent": "Materials"
         },
         "2007": {
             "highest_gross_profit": "No data",
@@ -36636,7 +36726,13 @@
             "third_largest_industry": "Information Technology",
             "smallest_industry": "Real Estate",
             "second_smallest_industry": "Materials",
-            "third_smallest_industry": "Financials"
+            "third_smallest_industry": "Financials",
+            "industry_with_the_most_invesmtent": "Consumer Discretionary",
+            "industry_with_the__second_most_invesmtent": "Industrials",
+            "industry_with_the_third_most_invesmtent": "Energy",
+            "industry_with_the_least_invesmtent": "Real Estate",
+            "industry_with_the__second_least_invesmtent": "Financials",
+            "industry_with_the__third_least_invesmtent": "Consumer Staples"
         },
         "2008": {
             "highest_gross_profit": "No data",
@@ -36649,7 +36745,13 @@
             "third_largest_industry": "Energy",
             "smallest_industry": "Real Estate",
             "second_smallest_industry": "Materials",
-            "third_smallest_industry": "Financials"
+            "third_smallest_industry": "Financials",
+            "industry_with_the_most_invesmtent": "Energy",
+            "industry_with_the__second_most_invesmtent": "Health Care",
+            "industry_with_the_third_most_invesmtent": "Information Technology",
+            "industry_with_the_least_invesmtent": "Real Estate",
+            "industry_with_the__second_least_invesmtent": "Consumer Discretionary",
+            "industry_with_the__third_least_invesmtent": "Financials"
         },
         "2009": {
             "highest_gross_profit": "No data",
@@ -36662,7 +36764,13 @@
             "third_largest_industry": "Energy",
             "smallest_industry": "Real Estate",
             "second_smallest_industry": "Materials",
-            "third_smallest_industry": "Financials"
+            "third_smallest_industry": "Financials",
+            "industry_with_the_most_invesmtent": "Energy",
+            "industry_with_the__second_most_invesmtent": "Information Technology",
+            "industry_with_the_third_most_invesmtent": "Health Care",
+            "industry_with_the_least_invesmtent": "Real Estate",
+            "industry_with_the__second_least_invesmtent": "Financials",
+            "industry_with_the__third_least_invesmtent": "Consumer Discretionary"
         },
         "2010": {
             "highest_gross_profit": "No data",
@@ -36675,7 +36783,13 @@
             "third_largest_industry": "Information Technology",
             "smallest_industry": "Real Estate",
             "second_smallest_industry": "Materials",
-            "third_smallest_industry": "Financials"
+            "third_smallest_industry": "Financials",
+            "industry_with_the_most_invesmtent": "Energy",
+            "industry_with_the__second_most_invesmtent": "Information Technology",
+            "industry_with_the_third_most_invesmtent": "Health Care",
+            "industry_with_the_least_invesmtent": "Real Estate",
+            "industry_with_the__second_least_invesmtent": "Consumer Discretionary",
+            "industry_with_the__third_least_invesmtent": "Financials"
         },
         "2011": {
             "highest_gross_profit": "No data",
@@ -36688,7 +36802,13 @@
             "third_largest_industry": "Information Technology",
             "smallest_industry": "Real Estate",
             "second_smallest_industry": "Materials",
-            "third_smallest_industry": "Financials"
+            "third_smallest_industry": "Financials",
+            "industry_with_the_most_invesmtent": "Energy",
+            "industry_with_the__second_most_invesmtent": "Information Technology",
+            "industry_with_the_third_most_invesmtent": "Health Care",
+            "industry_with_the_least_invesmtent": "Real Estate",
+            "industry_with_the__second_least_invesmtent": "Consumer Discretionary",
+            "industry_with_the__third_least_invesmtent": "Consumer Staples"
         },
         "2012": {
             "highest_gross_profit": "No data",
@@ -36701,7 +36821,13 @@
             "third_largest_industry": "Information Technology",
             "smallest_industry": "Real Estate",
             "second_smallest_industry": "Materials",
-            "third_smallest_industry": "Financials"
+            "third_smallest_industry": "Financials",
+            "industry_with_the_most_invesmtent": "Information Technology",
+            "industry_with_the__second_most_invesmtent": "Energy",
+            "industry_with_the_third_most_invesmtent": "Health Care",
+            "industry_with_the_least_invesmtent": "Real Estate",
+            "industry_with_the__second_least_invesmtent": "Consumer Discretionary",
+            "industry_with_the__third_least_invesmtent": "Financials"
         },
         "2013": {
             "highest_gross_profit": "No data",
@@ -36714,7 +36840,13 @@
             "third_largest_industry": "Energy",
             "smallest_industry": "Real Estate",
             "second_smallest_industry": "Materials",
-            "third_smallest_industry": "Financials"
+            "third_smallest_industry": "Financials",
+            "industry_with_the_most_invesmtent": "Information Technology",
+            "industry_with_the__second_most_invesmtent": "Energy",
+            "industry_with_the_third_most_invesmtent": "Health Care",
+            "industry_with_the_least_invesmtent": "Real Estate",
+            "industry_with_the__second_least_invesmtent": "Financials",
+            "industry_with_the__third_least_invesmtent": "Consumer Discretionary"
         },
         "2014": {
             "highest_gross_profit": "No data",
@@ -36727,7 +36859,13 @@
             "third_largest_industry": "Energy",
             "smallest_industry": "Real Estate",
             "second_smallest_industry": "Materials",
-            "third_smallest_industry": "Financials"
+            "third_smallest_industry": "Financials",
+            "industry_with_the_most_invesmtent": "Information Technology",
+            "industry_with_the__second_most_invesmtent": "Energy",
+            "industry_with_the_third_most_invesmtent": "Health Care",
+            "industry_with_the_least_invesmtent": "Real Estate",
+            "industry_with_the__second_least_invesmtent": "Materials",
+            "industry_with_the__third_least_invesmtent": "Industrials"
         },
         "2015": {
             "highest_gross_profit": "No data",
@@ -36740,7 +36878,13 @@
             "third_largest_industry": "Health Care",
             "smallest_industry": "Real Estate",
             "second_smallest_industry": "Materials",
-            "third_smallest_industry": "Financials"
+            "third_smallest_industry": "Financials",
+            "industry_with_the_most_invesmtent": "Information Technology",
+            "industry_with_the__second_most_invesmtent": "Energy",
+            "industry_with_the_third_most_invesmtent": "Health Care",
+            "industry_with_the_least_invesmtent": "Real Estate",
+            "industry_with_the__second_least_invesmtent": "Industrials",
+            "industry_with_the__third_least_invesmtent": "Financials"
         },
         "2016": {
             "highest_gross_profit": "No data",
@@ -36753,7 +36897,13 @@
             "third_largest_industry": "Communication Services",
             "smallest_industry": "Real Estate",
             "second_smallest_industry": "Materials",
-            "third_smallest_industry": "Financials"
+            "third_smallest_industry": "Financials",
+            "industry_with_the_most_invesmtent": "Information Technology",
+            "industry_with_the__second_most_invesmtent": "Energy",
+            "industry_with_the_third_most_invesmtent": "Health Care",
+            "industry_with_the_least_invesmtent": "Real Estate",
+            "industry_with_the__second_least_invesmtent": "Industrials",
+            "industry_with_the__third_least_invesmtent": "Financials"
         },
         "2017": {
             "highest_gross_profit": "No data",
@@ -36766,7 +36916,13 @@
             "third_largest_industry": "Communication Services",
             "smallest_industry": "Real Estate",
             "second_smallest_industry": "Materials",
-            "third_smallest_industry": "Financials"
+            "third_smallest_industry": "Financials",
+            "industry_with_the_most_invesmtent": "Information Technology",
+            "industry_with_the__second_most_invesmtent": "Energy",
+            "industry_with_the_third_most_invesmtent": "Health Care",
+            "industry_with_the_least_invesmtent": "Real Estate",
+            "industry_with_the__second_least_invesmtent": "Industrials",
+            "industry_with_the__third_least_invesmtent": "Financials"
         },
         "2018": {
             "highest_gross_profit": "McKesson",
@@ -36779,7 +36935,13 @@
             "third_largest_industry": "Industrials",
             "smallest_industry": "Real Estate",
             "second_smallest_industry": "Financials",
-            "third_smallest_industry": "Materials"
+            "third_smallest_industry": "Materials",
+            "industry_with_the_most_invesmtent": "Information Technology",
+            "industry_with_the__second_most_invesmtent": "Energy",
+            "industry_with_the_third_most_invesmtent": "Health Care",
+            "industry_with_the_least_invesmtent": "Industrials",
+            "industry_with_the__second_least_invesmtent": "Real Estate",
+            "industry_with_the__third_least_invesmtent": "Financials"
         },
         "2019": {
             "highest_gross_profit": "Walmart",
@@ -36792,7 +36954,13 @@
             "third_largest_industry": "Health Care",
             "smallest_industry": "Real Estate",
             "second_smallest_industry": "Materials",
-            "third_smallest_industry": "Financials"
+            "third_smallest_industry": "Financials",
+            "industry_with_the_most_invesmtent": "Information Technology",
+            "industry_with_the__second_most_invesmtent": "Energy",
+            "industry_with_the_third_most_invesmtent": "Health Care",
+            "industry_with_the_least_invesmtent": "Financials",
+            "industry_with_the__second_least_invesmtent": "Real Estate",
+            "industry_with_the__third_least_invesmtent": "Materials"
         },
         "2020": {
             "highest_gross_profit": "Amazon",
@@ -36805,7 +36973,13 @@
             "third_largest_industry": "Health Care",
             "smallest_industry": "Real Estate",
             "second_smallest_industry": "Materials",
-            "third_smallest_industry": "Financials"
+            "third_smallest_industry": "Financials",
+            "industry_with_the_most_invesmtent": "Information Technology",
+            "industry_with_the__second_most_invesmtent": "Energy",
+            "industry_with_the_third_most_invesmtent": "Health Care",
+            "industry_with_the_least_invesmtent": "Real Estate",
+            "industry_with_the__second_least_invesmtent": "Financials",
+            "industry_with_the__third_least_invesmtent": "Materials"
         },
         "2021": {
             "highest_gross_profit": "Amazon",
@@ -36818,7 +36992,13 @@
             "third_largest_industry": "Health Care",
             "smallest_industry": "Real Estate",
             "second_smallest_industry": "Materials",
-            "third_smallest_industry": "Financials"
+            "third_smallest_industry": "Financials",
+            "industry_with_the_most_invesmtent": "Information Technology",
+            "industry_with_the__second_most_invesmtent": "Health Care",
+            "industry_with_the_third_most_invesmtent": "Energy",
+            "industry_with_the_least_invesmtent": "Real Estate",
+            "industry_with_the__second_least_invesmtent": "Materials",
+            "industry_with_the__third_least_invesmtent": "Financials"
         },
         "2022": {
             "highest_gross_profit": "Amazon",
@@ -36831,7 +37011,13 @@
             "third_largest_industry": "Communication Services",
             "smallest_industry": "Real Estate",
             "second_smallest_industry": "Materials",
-            "third_smallest_industry": "Financials"
+            "third_smallest_industry": "Financials",
+            "industry_with_the_most_invesmtent": "Information Technology",
+            "industry_with_the__second_most_invesmtent": "Energy",
+            "industry_with_the_third_most_invesmtent": "Health Care",
+            "industry_with_the_least_invesmtent": "Materials",
+            "industry_with_the__second_least_invesmtent": "Real Estate",
+            "industry_with_the__third_least_invesmtent": "Financials"
         },
         "2023": {
             "highest_gross_profit": "Amazon",
@@ -36844,7 +37030,13 @@
             "third_largest_industry": "Communication Services",
             "smallest_industry": "Real Estate",
             "second_smallest_industry": "Materials",
-            "third_smallest_industry": "Financials"
+            "third_smallest_industry": "Financials",
+            "industry_with_the_most_invesmtent": "Energy",
+            "industry_with_the__second_most_invesmtent": "Information Technology",
+            "industry_with_the_third_most_invesmtent": "Health Care",
+            "industry_with_the_least_invesmtent": "Materials",
+            "industry_with_the__second_least_invesmtent": "Real Estate",
+            "industry_with_the__third_least_invesmtent": "Utilities"
         },
         "2024": {
             "highest_gross_profit": "No data",
@@ -36857,7 +37049,13 @@
             "third_largest_industry": "Health Care",
             "smallest_industry": "Real Estate",
             "second_smallest_industry": "Materials",
-            "third_smallest_industry": "Financials"
+            "third_smallest_industry": "Financials",
+            "industry_with_the_most_invesmtent": "Energy",
+            "industry_with_the__second_most_invesmtent": "Information Technology",
+            "industry_with_the_third_most_invesmtent": "Health Care",
+            "industry_with_the_least_invesmtent": "Materials",
+            "industry_with_the__second_least_invesmtent": "Consumer Staples",
+            "industry_with_the__third_least_invesmtent": "Real Estate"
         }
     }
 }

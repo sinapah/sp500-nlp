@@ -82,7 +82,13 @@ def extract_entities(question):
         "third largest industry": "third_largest_industry",
         "smallest industry": "smallest_industry",
         "second smallest industry": "second_smallest_industry",
-        "third smallest industry": "third_smallest_industry"
+        "third smallest industry": "third_smallest_industry",
+        "most investment": "industry_with_the_most_invesmtent",
+        "second most investment": "industry_with_the_second_most_invesmtent",
+        "third most investment": "industry_with_the_third_invesmtent",
+        "least investment": "industry_with_the_least_invesmtent",
+        "second least investment": "industry_with_the_second_least_invesmtent",
+        "third least investment": "industry_with_the_third_least_invesmtent"
     }
 
     # Use fuzzy matching to determine the best match
@@ -91,7 +97,7 @@ def extract_entities(question):
     if match:  # Ensure match is not None before unpacking
         best_match, _ = match  # Extract the best matching key
         aggregate_key = aggregate_mappings[best_match]
-   
+
     return ticker, year, aggregate_key
 
 def is_info_question(question):
@@ -223,11 +229,13 @@ print(answer_question("What was the largest industry in 2016?"))
 print(answer_question("What was the second largest industry in 2016?"))
 print(answer_question("What was the third largest industry in 2015?"))
 print(answer_question("What was the smallest industry in 2006?"))
-print(answer_question("What was the third largets industry in 2004?"))
+print(answer_question("What was the third largest industry in 2004?"))
 print(answer_question("What was the third smallest industry in 2018?"))
-#print(answer_question("What was the largest industry in 2016?"))
-#print(answer_question("What was the largest industry in 2016?"))
-#print(answer_question("What was the largest industry in 2016?"))
+print(answer_question("Which industry had the most investment in 2018?"))
+print(answer_question("Which industry had the second most investment in 2007?"))
+print(answer_question("Which industry had the least investment in 2008?"))
+print(answer_question("Which industry had the third most investment in 2003?"))
+print(answer_question("Which industry had the second least investment in 2004?"))
 
             
             

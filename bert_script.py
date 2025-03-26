@@ -1,53 +1,55 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Enhanced QA system using NLP-based entity extraction
-"""
-
-import pandas as pd
-import re
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+import json
 import spacy
 from transformers import pipeline
 from fuzzywuzzy import process
-import json
+import re
 
-# Load spaCy's pre-trained English model for NER
-nlp = spacy.load("en_core_web_sm")
+# Initialize FastAPI app
+app = FastAPI()
 
-# Load datasets
-industry_df = pd.read_csv("sp500-companies.csv", encoding='ISO-8859-1')
-finance_df = pd.read_csv("Financials_SP500.csv", encoding='ISO-8859-1')
-executive_df = pd.read_csv("sp500_firm_execu.csv", encoding='ISO-8859-1')
-aggregated_data = pd.read_csv("aggregated_stats.csv", encoding='ISO-8859-1')
+# Enable CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
-executive_df = executive_df.rename(columns={'tic': 'Ticker'})
+# Load resources once when server starts
+try:
+    # Load spaCy model
+    nlp = spacy.load("en_core_web_sm")
+    
+    # Load knowledge base
+    with open('knowledge_base.json', 'r') as file:
+        KNOWLEDGE_BASE = json.load(file)
+    
+    # Load company mappings
+    with open('sp500-companies.csv', 'r', encoding='ISO-8859-1') as file:
+        import pandas as pd
+        industry_df = pd.read_csv(file)
+        company_name_to_ticker = {row["Name"].lower(): row["Ticker"] for _, row in industry_df.iterrows()}
+    
+    # Initialize QA pipeline
+    qa_pipeline = pipeline("question-answering", model="distilbert-base-cased-distilled-squad")
+    
+    print("✅ All resources loaded successfully")
+except Exception as e:
+    print(f"❌ Error loading resources: {e}")
+    raise e
 
-# Standardize tickers
-for df in [finance_df, industry_df, executive_df]:
-    df["Ticker"] = df["Ticker"].astype(str).str.strip().str.upper()
-
-# Merge finance_df with industry_df to get company names
-merged_df = finance_df.merge(industry_df[['Ticker']], on="Ticker", how="left")
-merged_df["Name"] = merged_df["Name"].fillna("")
-
-# Create a lookup dictionary for quick company name -> ticker mapping
-company_name_to_ticker = {row["Name"].lower(): row["Ticker"] for _, row in industry_df.iterrows()}
-ticker_to_company_name = {row["Ticker"].lower(): row["Name"] for _, row in industry_df.iterrows()}
-# Create a structured knowledge base (financials + executives)
-
-with open('knowledge_base.json', 'r') as file:
-    knowledge_base = json.load(file)
-
-# Load a pre-trained QA model
-qa_pipeline = pipeline("question-answering", model="distilbert-base-cased-distilled-squad")
-
+class QuestionRequest(BaseModel):
+    question: str
 
 def fuzzy_company_lookup(company_name, company_name_to_ticker):
-    """
-    Finds the best match for a given company name using fuzzy matching.
-    """
     match, score = process.extractOne(company_name, company_name_to_ticker.keys())
-    return company_name_to_ticker[match] if score > 80 else None  # Use a threshold to avoid incorrect matches
+    return company_name_to_ticker[match] if score > 80 else None
 
 def extract_entities(question):
     """
@@ -90,7 +92,6 @@ def extract_entities(question):
         "second least investment": "industry_with_the_second_least_invesmtent",
         "third least investment": "industry_with_the_third_least_invesmtent"
     }
-
     # Use fuzzy matching to determine the best match
     match = process.extractOne(question.lower(), aggregate_mappings.keys(), score_cutoff=90)
 
@@ -100,41 +101,18 @@ def extract_entities(question):
 
     return ticker, year, aggregate_key
 
-def is_info_question(question):
-    """
-    Determines if the question is asking for company industry or headquarters.
-    """
-    keywords = ["headquarters", "located", "office", "based", "industry", "sector", "domain", "field", "date", "founded", "foundation"]
-    lower_question = question.lower()
-
-    return any(word in lower_question for word in keywords)
-
 def is_executive_question(question):
-    """
-    Determines if a question is about executives using dependency parsing and entity recognition
-    """
     doc = nlp(question)
-    
-    # Check for PERSON entities
     has_person = any(ent.label_ == "PERSON" for ent in doc.ents)
     
-    # Check for job title patterns using POS tags
-    # Common patterns for executive questions often have proper nouns (PROPN) 
-    # followed by or preceded by job-related words
     for token in doc:
-        # Check if token is part of a job title compound
         if token.dep_ == "compound" and token.head.pos_ == "PROPN":
             return True
-        
-        # Check for words like "serve", "work", "lead" that often indicate role questions
         if token.pos_ == "VERB" and token.lemma_ in {"serve", "work", "lead", "join", "head"}:
             return True
-        
-        # Check for title-related words
         if token.text.lower() in {"role", "position", "title", "job", "ceo", "executive", "executives"}:
             return True
     
-    # If we found a PERSON entity, check if the question structure suggests a role query
     if has_person:
         for token in doc:
             if token.dep_ == "ROOT" and token.pos_ == "VERB":
@@ -142,62 +120,66 @@ def is_executive_question(question):
     
     return False
 
+def is_info_question(question):
+    keywords = ["headquarters", "located", "office", "based", "industry", "sector", "domain", "field", "date", "founded", "foundation"]
+    return any(word in question.lower() for word in keywords)
+
 def answer_question(question):
     """
-    Handles financial, executive, and company info queries.
+    Main function to process questions and return answers
     """
+    print("⭐ Processing question:", question)
+    
     ticker, year, aggregate_key = extract_entities(question)
-    print(ticker, year, aggregate_key)
-    # Handle aggregate queries
+    print(f"📊 Extracted - Ticker: {ticker}, Year: {year}, Aggregate: {aggregate_key}")
+    
     if aggregate_key:
         if not year:
             return "Please specify a year."
-
-        result = knowledge_base.get("aggregates", {}).get(str(year), {}).get(aggregate_key, "No data available.")
-        return f"The company with the {aggregate_key.replace('_', ' ')} in {year} was {result}." if result != "No data available." else result
+        result = KNOWLEDGE_BASE.get("aggregates", {}).get(str(year), {}).get(aggregate_key, "No data available.")
+        return f"The {'company' if 'company' in question else 'industry'} with the {aggregate_key.replace('_', ' ')} in {year} was {result}." if result != "No data available." else result
 
     if not ticker:
+        print("❌ No ticker found")
         return "I couldn't determine the company you're asking about."
 
-    # Handle industry and headquarters queries
     if is_info_question(question):
-        info = knowledge_base.get(ticker, {}).get("info", "No company info available.")
-
+        info = KNOWLEDGE_BASE.get(ticker, {}).get("info", "No company info available.")
         if info != "No company info available.":
-            # Use the QA pipeline to extract the specific answer
             response = qa_pipeline(question=question, context=info)
+            return response['answer'] if response['score'] > 0.5 else info
 
-            # Return the extracted answer if the confidence is high
-            if response['score'] > 0.5:
-                return response['answer']
-            else:
-                return info  # Fallback to the full sentence if QA confidence is low
-
-    # Default to the latest year if none is provided
     if not year:
-        year = max(knowledge_base[ticker].keys())
+        year = max(str(y) for y in KNOWLEDGE_BASE[ticker].keys() if str(y).isdigit())
 
-    # Handle executive and financial queries
     if is_executive_question(question):
         print("Executive Question")
-        context = knowledge_base.get(ticker, {}).get(str(year), {}).get("executives", "No executive data available.")
+        context = KNOWLEDGE_BASE.get(ticker, {}).get(str(year), {}).get("executives", "No executive data available.")
     else:
-        print("NOT Executive Question")
-        context = knowledge_base.get(ticker, {}).get(str(year), {}).get("financials", "No financial data available.")
+        print("Financial Question")
+        context = KNOWLEDGE_BASE.get(ticker, {}).get(str(year), {}).get("financials", "No financial data available.")
 
     if "No data available" in context:
         return context
 
-    # Use the QA pipeline for the financials and executives
     response = qa_pipeline(question=question, context=context)
-
     return response['answer']
 
-# Example Queries
-#print(knowledge_base)
-print(knowledge_base.get('AAPL', {}).get('2020', {}).get("financials", "No financial data available."))
-print(answer_question("What was the revenue of Apple in 2020?"))
-'''print(answer_question("Who was the CEO of Apple in 2020?"))
+@app.post("/api/qa/")
+async def process_question(request: QuestionRequest):
+    """API endpoint for answering questions"""
+    try:
+        print("📝 Received question:", request.question)
+        response = answer_question(request.question)
+        print("✅ API Response:", response)
+        return {"answer": response}
+    except Exception as e:
+        print("❌ Error:", str(e))
+        return {"error": str(e)}
+
+print(answer_question("What company had the highest operating expense in 2023?"))
+'''print(answer_question("What was the revenue of apple in 2020?"))
+print(answer_question("Who was the CEO of Apple in 2020?"))
 print(answer_question("Who had the highest revenue in 2020?"))
 print(answer_question("How much net income did Microsoft have in 2019?"))
 print(answer_question("Who was the CEO of Apple in 2021?"))
@@ -219,9 +201,14 @@ print(answer_question("On what date was Apple founded?"))
 print(answer_question("What industry is Agilent Technologies in?"))
 print(answer_question("What industry is Federal Realty in?"))
 print(answer_question("What industry is American Electric Power in?"))
-print(answer_question("Where are the headquarters of American Electric Power ?"))
+print(answer_question("Where are the headquarters of American Electric Power ?"))'''
 
-print(answer_question("What was the largest industry in 2016?"))
+'''with open('questions.txt', 'r') as file:
+    for line in file:
+        print(line)
+        print(answer_question(line))
+        print('\n')'''
+'''print(answer_question("What was the largest industry in 2016?"))
 print(answer_question("What was the second largest industry in 2016?"))
 print(answer_question("What was the third largest industry in 2015?"))
 print(answer_question("What was the smallest industry in 2006?"))
@@ -232,10 +219,8 @@ print(answer_question("Which industry had the second most investment in 2007?"))
 print(answer_question("Which industry had the least investment in 2008?"))
 print(answer_question("Which industry had the third most investment in 2003?"))
 print(answer_question("Which industry had the second least investment in 2004?"))'''
-            
-'''with open('questions.txt', 'r') as file:
-    for line in file:
-        print(line)
-        print(answer_question(line))
-        print('\n')'''
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)
             

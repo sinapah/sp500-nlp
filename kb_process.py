@@ -132,7 +132,7 @@ most_investments_by_year = (
 
 least_investments_by_year = (
     industry_investments.groupby("Fiscal Year")
-    .apply(lambda x: x.nsmallest(3, "Long Term Investments & Receivables"))
+    .apply(lambda x: x.nsmallest(3, "Lodng Term Investments & Receivables"))
     .reset_index(drop=True)
 )
 

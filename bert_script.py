@@ -47,6 +47,7 @@ except Exception as e:
 
 class QuestionRequest(BaseModel):
     question: str
+    mode: str
 
 def fuzzy_company_lookup(company_name, company_name_to_ticker):
     match, score = process.extractOne(company_name, company_name_to_ticker.keys())
@@ -165,7 +166,7 @@ def generate_full_sentence(answer):
     generated_sentence = tokenizer.decode(output_ids[0], skip_special_tokens=True)
     return generated_sentence
 
-def answer_question(question):
+def answer_question(question, mode="BERT"):
     """
     Main function to process questions and return answers
     """
@@ -179,8 +180,11 @@ def answer_question(question):
         if not year:
             return "Please specify a year."
         result = KNOWLEDGE_BASE.get("aggregates", {}).get(str(year), {}).get(aggregate_key, "No data available.")
-        return generate_full_sentence(f"The {'company' if 'company' in question else 'industry'} with the {aggregate_key.replace('_', ' ')} in {year} was {result}." if result != "No data available." else result)
-
+        if mode == "T5":
+            return generate_full_sentence(f"The {'company' if 'company' in question else 'industry'} with the {aggregate_key.replace('_', ' ')} in {year} was {result}." if result != "No data available." else result)
+        else:
+            return f"The {'company' if 'company' in question else 'industry'} with the {aggregate_key.replace('_', ' ')} in {year} was {result}." if result != "No data available." else result
+            
     if not ticker:
         ###print("❌ No ticker found")
         return "I couldn't determine the company you're asking about."
@@ -188,10 +192,12 @@ def answer_question(question):
     # Handle industry and headquarters queries
     if is_info_question(question):
         info = KNOWLEDGE_BASE.get(ticker, {}).get("info", "No company info available.")
-        if info != "No company info available.":
-            #response = qa_pipeline(question=question, context=info)
-            #return response['answer'] if response['score'] > 0.5 else info
-            return generate_full_sentence(info)
+        if info != "No company info available.":      
+            if mode == "T5":
+                return generate_full_sentence(info)
+            else:
+                response = qa_pipeline(question=question, context=info)
+                return response['answer'] if response['score'] > 0.5 else info
 
     if not year:
         year = max(str(y) for y in KNOWLEDGE_BASE[ticker].keys() if str(y).isdigit())
@@ -206,14 +212,18 @@ def answer_question(question):
 
     if "No data available" in context:
         return context
-
-    return f"The answer to the question '{question} is {generate_full_sentence(context)}"
+    
+    if mode == "T5":
+        return generate_full_sentence(context)
+    else:
+        response = qa_pipeline(question=question, context=context)
+        return response['answer'] 
 
 @app.post("/api/qa/")
 async def process_question(request: QuestionRequest):
     """API endpoint for answering questions"""
     try:
-        response = answer_question(request.question)
+        response = answer_question(request.question, request.mode)
         return {"answer": response}
     except Exception as e:
         print("❌ Error:", str(e))

@@ -48,6 +48,7 @@ except Exception as e:
 class QuestionRequest(BaseModel):
     question: str
     mode: str
+    showSource: bool = False
 
 def fuzzy_company_lookup(company_name, company_name_to_ticker):
     match, score = process.extractOne(company_name, company_name_to_ticker.keys())
@@ -166,7 +167,7 @@ def generate_full_sentence(answer):
     generated_sentence = tokenizer.decode(output_ids[0], skip_special_tokens=True)
     return generated_sentence
 
-def answer_question(question, mode="BERT"):
+def answer_question(question, mode="BERT", showSource=False):
     """
     Main function to process questions and return answers
     """
@@ -194,10 +195,16 @@ def answer_question(question, mode="BERT"):
         info = KNOWLEDGE_BASE.get(ticker, {}).get("info", "No company info available.")
         if info != "No company info available.":      
             if mode == "T5":
-                return generate_full_sentence(info)
+                if showSource:
+                    return generate_full_sentence(info), info
+                else:
+                    return generate_full_sentence(info)
             else:
                 response = qa_pipeline(question=question, context=info)
-                return response['answer'] if response['score'] > 0.5 else info
+                if showSource:
+                    return response['answer'], info
+                else:
+                    return response['answer'] if response['score'] > 0.5 else info
 
     if not year:
         year = max(str(y) for y in KNOWLEDGE_BASE[ticker].keys() if str(y).isdigit())
@@ -214,22 +221,30 @@ def answer_question(question, mode="BERT"):
         return context
     
     if mode == "T5":
-        return generate_full_sentence(context)
+        if showSource:
+            return generate_full_sentence(context), context
+        else:
+            return generate_full_sentence(context)
     else:
         response = qa_pipeline(question=question, context=context)
-        return response['answer'] 
+        if showSource:
+            return response['answer'], context
+        else:
+            return response['answer']
 
 @app.post("/api/qa/")
 async def process_question(request: QuestionRequest):
     """API endpoint for answering questions"""
     try:
-        response = answer_question(request.question, request.mode)
+        response = answer_question(request.question, request.mode, request.showSource)
+        if isinstance(response, tuple) and len(response) == 2:
+            return {"answer": response[0], "source": response[1]}
         return {"answer": response}
     except Exception as e:
         print("❌ Error:", str(e))
         return {"error": str(e)}
 
-print(answer_question("What company had the highest operating expense in 2023?"))
+'''print(answer_question("What company had the highest operating expense in 2023?"))
 print(answer_question("What was the revenue of apple in 2020?"))
 print(answer_question("Who was the CEO of Apple in 2020?"))
 print(answer_question("Who had the highest revenue in 2020?"))
@@ -253,7 +268,7 @@ print(answer_question("On what date was Apple founded?"))
 print(answer_question("What industry is Agilent Technologies in?"))
 print(answer_question("What industry is Federal Realty in?"))
 print(answer_question("What industry is American Electric Power in?"))
-print(answer_question("Where are the headquarters of American Electric Power ?"))
+print(answer_question("Where are the headquarters of American Electric Power ?"))'''
 
 '''with open('questions.txt', 'r') as file:
     for line in file:

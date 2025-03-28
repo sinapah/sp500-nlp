@@ -82,9 +82,17 @@ for _, row in executive_df.iterrows():
     if year not in knowledge_base[ticker]:
         knowledge_base[ticker][year] = {}
 
-    knowledge_base[ticker][year]["executives"] = (
-        f"In {year}, {row['exec_fname']} {row['exec_lname']} served as {row['title']} at {ticker}."
-    )
+    # Check if executives info already exists
+    if "executives" in knowledge_base[ticker][year]:
+        # Append the new executive info
+        knowledge_base[ticker][year]["executives"] += (
+            f" In {year}, {row['exec_fname']} {row['exec_lname']} served as {row['title']} at {ticker}."
+        )
+    else:
+        # Create new executive info
+        knowledge_base[ticker][year]["executives"] = (
+            f"In {year}, {row['exec_fname']} {row['exec_lname']} served as {row['title']} at {ticker}."
+        )
 
 # ===========================
 # 📌 Find the 1st, 2nd, and 3rd Largest and smallest Industries by Assets and Investments Per Year
@@ -132,7 +140,7 @@ most_investments_by_year = (
 
 least_investments_by_year = (
     industry_investments.groupby("Fiscal Year")
-    .apply(lambda x: x.nsmallest(3, "Lodng Term Investments & Receivables"))
+    .apply(lambda x: x.nsmallest(3, "Long Term Investments & Receivables"))
     .reset_index(drop=True)
 )
 
